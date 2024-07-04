@@ -1,7 +1,7 @@
 import { computed, defineComponent, ref } from 'vue'
 import { coverBoxProps } from './types'
 import { EyeInvisibleOutlined } from '@ant-design/icons-vue'
-import styles from './coverBox.module.scss'
+import stylecss from './coverbox.module.scss'
 const NAME = 'www-cover-box'
 
 export default defineComponent({
@@ -28,7 +28,7 @@ export default defineComponent({
 
     return () => (
       <div
-        class={visible.value ? '' : styles['cover-box']}
+        class={visible.value ? '' : stylecss['cover-box']}
         onClick={toggleVisibility}
         style={coverStyles.value}
       >
@@ -43,7 +43,7 @@ export default defineComponent({
             )
           : (
           <EyeInvisibleOutlined
-            class={styles['cover-icon']}
+            class={stylecss['cover-icon']}
             style={{ color: props.iconColor }}
           />
             )}

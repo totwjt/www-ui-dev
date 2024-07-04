@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "types": ["vite/client"],
     "target": "es2015",
     "lib": [
       "es2015"
