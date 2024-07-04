@@ -1,0 +1,23 @@
+{
+  "name": "@demo-ui-lib/demo-ui-lib",
+  "version": "1.0.0",
+  "description": "组件库",
+  "main": "index.ts",
+  "scripts": {
+    "build": "rimraf ../../lib && vue-tsc --noEmit && vite build"
+  },
+  "keywords": [],
+  "author": "Awwwait",
+  "license": "ISC",
+  "dependencies": {
+    "@demo-ui-lib/cover-box": "workspace:^",
+    "@demo-ui-lib/crop-img": "workspace:^1.0.0",
+    "@demo-ui-lib/desensitization": "workspace:^1.0.0",
+    "@demo-ui-lib/foo": "workspace:^"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "vite-plugin-dts": "^2.3.0",
+    "vite-plugin-libcss": "^1.1.1"
+  }
+}
