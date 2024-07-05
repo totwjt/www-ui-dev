@@ -12,7 +12,7 @@ export default defineComponent({
   emits: ['update:visible'],
   setup (props, { emit, slots }) {
     const visible = ref(false)
-    console.log('slots.default', slots.default?.() || '')
+
     const con = computed(() => {
       if (props.value) return props.value
 
