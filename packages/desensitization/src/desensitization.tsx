@@ -9,7 +9,8 @@ const NAME = 'www-desensitization'
 export default defineComponent({
   name: NAME,
   props: desensitizationProps,
-  setup (props, { slots }) {
+  emits: ['update:visible'],
+  setup (props, { emit, slots }) {
     const visible = ref(false)
 
     const con = computed(() => {
@@ -28,16 +29,10 @@ export default defineComponent({
       }
     }
 
-    const _textEncode = (text: any, before: number = 2, after: number = 2) => {
+    const _textEncode = (text, before = 2, after = 2) => {
       if (!text) {
         return ''
       }
-      console.log(
-        'text: any, before: number = 2, after: number = 2',
-        text,
-        before,
-        after
-      )
       const beforeStr = text.substring(0, before)
       const afterStr = text.slice(-1 * after)
       return beforeStr + '******' + afterStr
@@ -51,6 +46,13 @@ export default defineComponent({
         cursor: 'pointer',
         paddingLeft: '5px',
         color: visible.value ? '#35485E' : '#00B3EF'
+      }
+    }
+
+    const toggleVisibility = () => {
+      visible.value = !visible.value
+      if (visible.value) {
+        emit('update:visible', visible.value)
       }
     }
 
@@ -69,12 +71,12 @@ export default defineComponent({
               <EyeInvisibleOutlined
                 style={iconStyle()}
                 v-show={!visible.value}
-                onClick={() => (visible.value = !visible.value)}
+                onClick={toggleVisibility}
               />
               <EyeOutlined
                 style={iconStyle()}
                 v-show={visible.value}
-                onClick={() => (visible.value = !visible.value)}
+                onClick={toggleVisibility}
               />
             </div>
           )}
