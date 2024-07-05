@@ -12,9 +12,16 @@ export default defineComponent({
   emits: ['update:visible'],
   setup (props, { emit, slots }) {
     const visible = ref(false)
-
+    console.log('slots.default', slots.default?.() || '')
     const con = computed(() => {
-      return props.value || slots.default?.()[0].children || ''
+      if (props.value) return props.value
+
+      const slotContent = slots.default?.()[0].children || ''
+      if (slotContent && typeof slotContent === 'string') {
+        return slotContent
+      } else {
+        return slotContent[0].children || ''
+      }
     })
 
     const fixCon = computed(() => {
@@ -22,7 +29,9 @@ export default defineComponent({
     })
 
     const desensitization = (con) => {
+      console.log('con', con, props.type)
       if (props.type) {
+        console.log('_textEncode(con, ...getType(props.type))', _textEncode(con, ...getType(props.type)))
         return _textEncode(con, ...getType(props.type))
       } else {
         return _textEncode(con, props.beforLen, props.afterLen)
@@ -30,6 +39,7 @@ export default defineComponent({
     }
 
     const _textEncode = (text, before = 2, after = 2) => {
+      console.log('text, before = 2, after = 2', text, before, after)
       if (!text) {
         return ''
       }
@@ -64,7 +74,7 @@ export default defineComponent({
               <label for="desensitization-input">{props.label}</label>
             )}
             {!visible.value && <span>{fixCon.value}</span>}
-            {visible.value && slots.default ? slots.default() : null}
+            {visible.value && con.value}
           </div>
           {con.value && (
             <div>

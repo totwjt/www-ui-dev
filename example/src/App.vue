@@ -14,10 +14,12 @@
     <www-cover-box>
       123
     </www-cover-box>
+    <CoverFeildLog type="phone">13222222222</CoverFeildLog>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import CoverFeildLog from './coverFeild.vue'
 
 const msg = ref('hello world')
 </script>
