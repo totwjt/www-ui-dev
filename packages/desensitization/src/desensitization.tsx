@@ -20,7 +20,7 @@ export default defineComponent({
       if (slotContent && typeof slotContent === 'string') {
         return slotContent
       } else {
-        return slotContent[0].children || ''
+        return slotContent[0]?.children || ''
       }
     })
 
