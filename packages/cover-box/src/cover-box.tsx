@@ -17,7 +17,7 @@ export default defineComponent({
     }
 
     const coverStyles = computed(() => {
-      const styles = { height: props.height, width: props.width }
+      const styles = { height: props.height, width: props.width, margin: '0 auto' }
       if (!visible.value) {
         Object.assign(styles, {
           backgroundColor: props.bgColor

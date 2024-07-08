@@ -31,7 +31,6 @@ export default defineComponent({
     const desensitization = (con) => {
       console.log('con', con, props.type)
       if (props.type) {
-        console.log('_textEncode(con, ...getType(props.type))', _textEncode(con, ...getType(props.type)))
         return _textEncode(con, ...getType(props.type))
       } else {
         return _textEncode(con, props.beforLen, props.afterLen)
