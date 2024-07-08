@@ -29,7 +29,6 @@ export default defineComponent({
     })
 
     const desensitization = (con) => {
-      console.log('con', con, props.type)
       if (props.type) {
         return _textEncode(con, ...getType(props.type))
       } else {
@@ -38,7 +37,6 @@ export default defineComponent({
     }
 
     const _textEncode = (text, before = 2, after = 2) => {
-      console.log('text, before = 2, after = 2', text, before, after)
       if (!text) {
         return ''
       }

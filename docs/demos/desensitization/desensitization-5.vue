@@ -1,7 +1,7 @@
 <template>
-  <www-cover-box>
-    <img src="/logo.png" alt="Logo" />
-  </www-cover-box>
+  <www-desensitization>
+    <div><div>1233</div><div>123</div></div>
+  </www-desensitization>
 </template>
 
 <script lang="ts" setup>

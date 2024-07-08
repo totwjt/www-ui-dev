@@ -20,10 +20,11 @@
 
 <preview path="../demos/desensitization/desensitization-3.vue" title="预设类型" description=" "></preview>
 
+<preview path="../demos/desensitization/desensitization-5.vue" title="预设类型" description=" "></preview>
+
 ## 自定义显示位数
 
 <preview path="../demos/desensitization/desensitization-4.vue" title="自定义显示位数" description="TODO：未实现"></preview>
-
 
 ## 组件 API
 
@@ -37,7 +38,6 @@
 |iconSize|字体|number|number|16(rpx)|
 |dot|占位|string|string|'*'|
 |value|正文|string|string|空|
-|正文|string|string|string|空|
 |beforLen|显示字符个数|number|number|0|
 |afterLen|显示字符个数|number|number|0|
 
