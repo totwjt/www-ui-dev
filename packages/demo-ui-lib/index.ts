@@ -3,6 +3,7 @@ import Foo from '@demo-ui-lib/foo'
 import CropImg from '@demo-ui-lib/crop-img'
 import Desensitization from '@demo-ui-lib/desensitization'
 import CoverBox from '@demo-ui-lib/cover-box'
+import ConsultantInformation from '@demo-ui-lib/consultant-information'
 // import component end
 import '../scss/index.scss'
 
@@ -10,7 +11,8 @@ const components = [
   Foo,
   CropImg,
   Desensitization,
-  CoverBox
+  CoverBox,
+  ConsultantInformation
 ] // components
 
 // 全局动态添加组件

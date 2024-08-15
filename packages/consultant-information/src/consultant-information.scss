@@ -1,0 +1,68 @@
+.drawer-container {
+  .ant-drawer-header {
+    height: 55px;
+    background-color: #fff;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 0 24px;
+
+    .ant-drawer-header-title {
+      position: relative;
+
+      .ant-drawer-title {
+        display: flex;
+        align-items: center;
+
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 4px;
+          height: 22px;
+          background-color: #0090ff;
+          margin-right: 8px;
+        }
+      }
+
+      .ant-drawer-close {
+        position: absolute;
+        right: 0;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .ant-drawer-title {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 16px;
+  }
+
+  .ant-drawer-body {
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 15px;
+  }
+
+  .ant-drawer-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    height: 55px;
+
+    .ant-btn-primary {
+      background-color: #0090ff;
+    }
+  }
+
+  .ant-descriptions {
+    .ant-descriptions-item-label {
+      color: #919191;
+    }
+  }
+
+  .ant-form {
+    .ant-form-item-label label {
+      color: #919191;
+    }
+  }
+}

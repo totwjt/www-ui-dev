@@ -10,6 +10,7 @@
   "author": "Awwwait",
   "license": "ISC",
   "dependencies": {
+    "@demo-ui-lib/consultant-information": "workspace:^1.0.0",
     "@demo-ui-lib/cover-box": "workspace:^",
     "@demo-ui-lib/crop-img": "workspace:^1.0.0",
     "@demo-ui-lib/desensitization": "workspace:^1.0.0",
