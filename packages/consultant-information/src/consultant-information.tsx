@@ -87,7 +87,7 @@ export default defineComponent({
             <a-descriptions-item span={3} label="照片材料">
               <a-image-preview-group>
                 {info.photoMaterials?.map((item) => (
-                  <a-image width={200} src={item} />
+                  <a-image width={100} src={item} />
                 ))}
               </a-image-preview-group>
             </a-descriptions-item>
