@@ -48,13 +48,13 @@ export default defineComponent({
         >
           <a-descriptions bordered size="small" title={info.commitTime}>
             <a-descriptions-item label="姓名">
-              {info.patient.patientName}
+              {info.patient?.patientName}
             </a-descriptions-item>
             <a-descriptions-item label="性别">
-              {info.patient.patientSex === 1 ? '男' : '女'}
+              {info.patient?.patientSex === 1 ? '男' : '女'}
             </a-descriptions-item>
             <a-descriptions-item label="年龄">
-              {info.patient.patientAge}
+              {info.patient?.patientAge}
             </a-descriptions-item>
             <a-descriptions-item span={1.5} label="身高">
               {info.patient?.height > 0 ? `${info.patient.height}cm` : '-'}
@@ -68,21 +68,21 @@ export default defineComponent({
 
           <a-descriptions bordered size="small" labelStyle={{ width: '100px' }}>
             <a-descriptions-item span={3} label="职业">
-              {info.patient.job}
+              {info.patient?.job}
             </a-descriptions-item>
             <a-descriptions-item span={3} label="居住地">
-              {info.patient.provinceCh}
-              {info.patient.cityCh}
-              {info.patient.countryCh}
+              {info.patient?.provinceCh}
+              {info.patient?.cityCh}
+              {info.patient?.countryCh}
             </a-descriptions-item>
             <a-descriptions-item span={3} label="病情描述">
-              {info.patient.complaint}
+              {info.patient?.complaint}
             </a-descriptions-item>
             <a-descriptions-item span={3} label="既往病史">
-              {info.patient.medicalHistory}
+              {info.patient?.medicalHistory}
             </a-descriptions-item>
             <a-descriptions-item span={3} label="过敏史">
-              {info.patient.allergicHistory}
+              {info.patient?.allergicHistory}
             </a-descriptions-item>
             <a-descriptions-item span={3} label="照片材料">
               <a-image-preview-group>
@@ -92,13 +92,13 @@ export default defineComponent({
               </a-image-preview-group>
             </a-descriptions-item>
             <a-descriptions-item span={3} label="诊前问题">
-              {info.preQuestions.map((item) => (
+              {info?.preQuestions.map((item) => (
                 <>
                   <p>{item?.problem || ''}</p>
                   <p>{item?.answer || ''}</p>
                 </>
               ))}
-              {info.preQuestions}
+              {info?.preQuestions}
             </a-descriptions-item>
           </a-descriptions>
         </a-drawer>
