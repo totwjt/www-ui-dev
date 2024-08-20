@@ -85,14 +85,14 @@ export default defineComponent({
               {info.patient?.allergicHistory}
             </a-descriptions-item>
             <a-descriptions-item span={3} label="照片材料">
-              <a-image-preview-group v-if="info.photoMaterials && info.photoMaterials.length > 0">
-                {info.photoMaterials.map((item) => (
+              <a-image-preview-group>
+                {info.photoMaterials?.map((item) => (
                   <a-image width={200} src={item} />
                 ))}
               </a-image-preview-group>
             </a-descriptions-item>
             <a-descriptions-item span={3} label="诊前问题">
-              {info?.preQuestions.map((item) => (
+              {info?.preQuestions?.map((item) => (
                 <>
                   <p>{item?.problem || ''}</p>
                   <p>{item?.answer || ''}</p>
