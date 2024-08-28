@@ -7,6 +7,37 @@
 
 ## 组件 API
 
+### types todo.
+
+```typescript
+type Patient = {
+  patientName: string;
+  patientAge: string;
+  patientSex: number;
+  disease: string;
+  symptom: string;
+  patientId: string;
+  height: number;
+  weight: number;
+  job: string;
+  provinceCh: string;
+  cityCh: string;
+  countryCh: string;
+  complaint: string;
+  medicalHistory: string;
+  allergicHistory: string;
+  createTime: string;
+  orderType: number;
+};
+
+type Info = {
+  commitTime: string;
+  patient: Patient;
+  preQuestions: string[];
+  photoMaterials: string[];
+};
+```
+
 ### Attributes 属性
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
