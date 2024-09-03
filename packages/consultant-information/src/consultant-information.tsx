@@ -46,21 +46,21 @@ export default defineComponent({
             title: () => props.title
           }}
         >
-          <a-descriptions bordered size="small" title={info.commitTime}>
+          <a-descriptions bordered size="small" title={props.info.commitTime}>
             <a-descriptions-item label="姓名">
-              {info.patient?.patientName}
+              {props.info.patient?.patientName}
             </a-descriptions-item>
             <a-descriptions-item label="性别">
-              {info.patient?.patientSex === 1 ? '男' : '女'}
+              {props.info.patient?.patientSex === 1 ? '男' : '女'}
             </a-descriptions-item>
             <a-descriptions-item label="年龄">
-              {info.patient?.patientAge}
+              {props.info.patient?.patientAge}
             </a-descriptions-item>
             <a-descriptions-item span={1.5} label="身高">
-              {info.patient?.height > 0 ? `${info.patient.height}cm` : '-'}
+              {props.info.patient?.height > 0 ? `${props.info.patient.height}cm` : '-'}
             </a-descriptions-item>
             <a-descriptions-item span={1.5} label="体重">
-              {info.patient?.weight > 0 ? `${info.patient.height}kg` : '-'}
+              {props.info.patient?.weight > 0 ? `${props.info.patient.height}kg` : '-'}
             </a-descriptions-item>
           </a-descriptions>
 
@@ -68,25 +68,25 @@ export default defineComponent({
 
           <a-descriptions bordered size="small" labelStyle={{ width: '100px' }}>
             <a-descriptions-item span={3} label="职业">
-              {info.patient?.job}
+              {props.info.patient?.job}
             </a-descriptions-item>
             <a-descriptions-item span={3} label="居住地">
-              {info.patient?.provinceCh}
-              {info.patient?.cityCh}
-              {info.patient?.countryCh}
+              {props.info.patient?.provinceCh}
+              {props.info.patient?.cityCh}
+              {props.info.patient?.countryCh}
             </a-descriptions-item>
             <a-descriptions-item span={3} label="病情描述">
-              {info.patient?.complaint}
+              {props.info.patient?.complaint}
             </a-descriptions-item>
             <a-descriptions-item span={3} label="既往病史">
-              {info.patient?.medicalHistory}
+              {props.info.patient?.medicalHistory}
             </a-descriptions-item>
             <a-descriptions-item span={3} label="过敏史">
-              {info.patient?.allergicHistory}
+              {props.info.patient?.allergicHistory}
             </a-descriptions-item>
             <a-descriptions-item span={3} label="照片材料">
               <a-image-preview-group>
-                {info.photoMaterials?.map((item) => (
+                {props.info.photoMaterials?.map((item) => (
                   <a-image width={100} src={item} />
                 ))}
               </a-image-preview-group>
