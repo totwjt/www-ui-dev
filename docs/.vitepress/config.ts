@@ -4,7 +4,8 @@ import { components } from '../components'
 
 const nav: DefaultTheme.NavItem[] = [
   { text: '指南', link: '/guide/' },
-  { text: '组件', link: '/components/foo' }
+  { text: '组件', link: '/components/foo' },
+  { text: 'www-cli', link: 'https://codeup.aliyun.com/64a8f522a708906d745acea8/web/management-system-vue/tree/master/cli' }
 ]
 
 const sidebar: DefaultTheme.Sidebar = {
@@ -32,10 +33,10 @@ export default defineConfig({
   lastUpdated: true,
   themeConfig: {
     logo: '/logo.png',
-    siteTitle: '组件库标题',
+    siteTitle: 'www-ui',
     outline: 3,
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://codeup.aliyun.com/64a8f522a708906d745acea8/web/www-ui' }
     ],
     nav,
     sidebar,

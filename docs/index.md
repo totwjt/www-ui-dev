@@ -1,12 +1,12 @@
 ---
 layout: home
 
-title: 我是个大聪明
-titleTemplate: 我是个大聪明
+title: www-ui
+titleTemplate: 组件库
 editLink: true
 lastUpdated: true
 hero:
-  name: 组件库名称
+  name: WWW-UI
   text: 组件库中文名称
   tagline: 组件库描述 / SLOGAN
   image:
@@ -19,6 +19,9 @@ hero:
     - theme: alt
       text: 组件
       link: /components/foo
+    - theme: alt
+      text: www-cli
+      link: https://codeup.aliyun.com/64a8f522a708906d745acea8/web/management-system-vue/tree/master/cli
 features:
   - icon: 🔨
     title: 功能/特点 1
