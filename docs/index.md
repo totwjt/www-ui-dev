@@ -1,8 +1,8 @@
 ---
 layout: home
 
-title: 选项卡标题
-titleTemplate: 选项卡描述
+title: 我是个大聪明
+titleTemplate: 我是个大聪明
 editLink: true
 lastUpdated: true
 hero:
@@ -29,4 +29,5 @@ features:
   - icon: ✈️
     title: 功能/特点 3。
     details: 功能/特点 3 具体描述信息。
+footer: MIT Licensed | Copyright © 2022-present [Your Name]
 ---

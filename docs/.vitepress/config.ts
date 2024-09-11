@@ -38,7 +38,11 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ],
     nav,
-    sidebar
+    sidebar,
+    footer: {
+      message: 'ICP备案号：<a href="https://beian.miit.gov.cn/" target="_blank">京ICP备19041599号-2</a>',
+      copyright: '版权所有 © 2024 www.521nb.cn'
+    }
   },
   markdown: {
     theme: {
