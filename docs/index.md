@@ -29,5 +29,4 @@ features:
   - icon: ✈️
     title: 功能/特点 3。
     details: 功能/特点 3 具体描述信息。
-footer: MIT Licensed | Copyright © 2022-present [Your Name]
 ---

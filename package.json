@@ -1,5 +1,5 @@
 {
-  "name": "@totwjt/www-ui",
+  "name": "www-ui",
   "version": "1.1.18",
   "description": "Vue3组件库",
   "author": "Awwwait",
@@ -38,6 +38,7 @@
     "gen:component": "pnpm run -C cli gen",
     "start:verdaccio": "pnpm verdaccio",
     "pub:local": "pnpm publish --registry http://localhost:4873/",
+    "pub:hy": "pnpm publish --registry https://packages.aliyun.com/64a8f522a708906d745acea8/npm/hy-web/",
     "pub:npm": "pnpm publish --access=public",
     "lint": "eslint \"{cli,packages,docs,example}/**/*.{js,ts,vue,jsx,tsx}\" --fix"
   },
