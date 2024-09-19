@@ -1,5 +1,5 @@
 <template>
-  <www-test2></www-test2>
+  <www-tool></www-tool>
 </template>
 
 <script lang="ts" setup>

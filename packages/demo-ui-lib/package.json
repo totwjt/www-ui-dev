@@ -14,7 +14,8 @@
     "@demo-ui-lib/cover-box": "workspace:^",
     "@demo-ui-lib/crop-img": "workspace:^1.0.0",
     "@demo-ui-lib/desensitization": "workspace:^1.0.0",
-    "@demo-ui-lib/foo": "workspace:^"
+    "@demo-ui-lib/foo": "workspace:^",
+    "@demo-ui-lib/tool": "workspace:^1.0.0"
   },
   "devDependencies": {
     "rimraf": "^3.0.2",

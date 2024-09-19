@@ -25,3 +25,5 @@ const install = (app: App): void => {
 export default {
   install
 }
+
+export * from '@demo-ui-lib/tool'

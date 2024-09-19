@@ -20,10 +20,12 @@
     <p>就诊人详情</p>
     <a-button @click="HandleVisible">visible</a-button>
     <www-consultant-information v-model:visible="visible" :info="info"></www-consultant-information>
+    平台：{{ platform() }}
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import { platform } from '@demo-ui-lib/demo-ui-lib'
 import CoverFeildLog from './coverFeild.vue'
 const visible = ref(false)
 const msg = ref('hello world')
