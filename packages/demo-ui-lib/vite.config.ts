@@ -27,7 +27,7 @@ export default defineConfig({
     },
     outDir: path.resolve(__dirname, '../../lib'),
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', /^@demo-ui-lib\/(?!tool)/],
       output: {
         globals: {
           vue: 'Vue'

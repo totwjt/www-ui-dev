@@ -20,11 +20,12 @@
   "exports": {
     ".": {
       "require": "./lib/demo-ui-lib.umd.js",
+      "types": "./lib/demo-ui-lib/index.ts",
       "import": "./lib/demo-ui-lib.es.js"
     },
     "./tool": {
-      "types": "./packages/tool/index.ts",
-      "import": "./packages/tool/index.ts"
+      "types": "./lib/tool/index.ts",
+      "import": "./lib/tool/index.ts"
     }
   },
   "scripts": {
