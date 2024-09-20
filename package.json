@@ -1,6 +1,6 @@
 {
   "name": "@www/ui",
-  "version": "1.1.20",
+  "version": "1.1.18",
   "description": "Vue3组件库",
   "author": "Awwwait",
   "private": false,
@@ -20,12 +20,7 @@
   "exports": {
     ".": {
       "require": "./lib/demo-ui-lib.umd.js",
-      "types": "./lib/demo-ui-lib/index.ts",
       "import": "./lib/demo-ui-lib.es.js"
-    },
-    "./tool": {
-      "types": "./lib/tool/index.ts",
-      "import": "./lib/tool/index.ts"
     }
   },
   "scripts": {
