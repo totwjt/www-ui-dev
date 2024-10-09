@@ -145,7 +145,7 @@ const renderTitle = computed(() => {
 const show = (config:AddrConfig) => {
   console.log('config', config)
   visible.value = true
-  showSubTitle.value = config.showSubTitle ?? false
+  showSubTitle.value = config?.showSubTitle || false
   if ('subTitle' in config) subTitle.value = config.subTitle
 }
 
