@@ -4,5 +4,6 @@ export const components = [
   { text: 'Desensitization 脱敏', link: '/components/desensitization' },
   { text: 'CoverBox 隐私遮罩层', link: '/components/cover-box' },
   { text: 'ConsultantInformation 就诊人详情', link: '/components/consultant-information' },
-  { text: 'Tool tool', link: '/components/tool' }
+  { text: 'Tool 常用的工具', link: '/components/tool' },
+  { text: 'Address 地址管理', link: '/components/address' }
 ] // end

@@ -1,32 +1,83 @@
 <template>
   <div class="site">
     <h1>组件库测试站点</h1>
-    <p>测试站点主要用于开发过程中测试组件，即在开发过程中由业务驱动组件开发。</p>
+    <p>
+      测试站点主要用于开发过程中测试组件，即在开发过程中由业务驱动组件开发。
+    </p>
     <p>{{ msg }}</p>
-    <www-desensitization type="phone" label="手机："
-      @update:visible="visible => console.log(visible)">13260462433</www-desensitization>
+    <www-desensitization
+      type="phone"
+      label="手机："
+      @update:visible="(visible) => console.log(visible)"
+      >13260462433</www-desensitization
+    >
     <www-foo></www-foo>
-    <www-cover-box style="width:100px;height:100px" bg-color="red" width="100%" height="100%">
+    <www-cover-box
+      style="width: 100px; height: 100px"
+      bg-color="red"
+      width="100%"
+      height="100%"
+    >
       <a-image
-        src="https://upload.jianshu.io/users/upload_avatars/26325037/1d3fda5b-f6dd-4c9c-a140-d794512f9e21.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"></a-image>
+        src="https://upload.jianshu.io/users/upload_avatars/26325037/1d3fda5b-f6dd-4c9c-a140-d794512f9e21.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+      ></a-image>
     </www-cover-box>
-    <br>
-    <br>
-    <br>
-    <www-cover-box>
-      123
-    </www-cover-box>
+    <br />
+    <br />
+    <br />
+    <www-cover-box> 123 </www-cover-box>
     <CoverFeildLog type="phone">13222222222</CoverFeildLog>
     <p>就诊人详情</p>
     <a-button @click="HandleVisible">visible</a-button>
-    <www-consultant-information v-model:visible="visible" :info="info"></www-consultant-information>
-    平台：{{ platform() }}
+    <www-consultant-information
+      v-model:visible="visible"
+      :info="info"
+    ></www-consultant-information>
+
+    <div>平台：{{ platform() }}</div>
+
+    <h1>地址管理</h1>
+    <a-button @click="HandleAddress">地址管理</a-button>
+    <www-address ref="addressRef" @copyInviteLinkEmit="copyInviteLinkEmit">
+      <template #header1>
+        <div class="flex row-between col-center pb20 m10">
+          <div>
+            <div>张三名 17363277123</div>
+            <div>北京市朝阳区大院刚到手 大师对哈速度哈扫地机取货</div>
+          </div>
+          <a-button @click="addressEdit">修改</a-button>
+        </div>
+      </template>
+    </www-address>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
 import { platform } from '@demo-ui-lib/demo-ui-lib'
 import CoverFeildLog from './coverFeild.vue'
+// import subtitle from './sub-title.vue'
+
+/* ----------------------------------------------------*\
+｜                       地址管理
+\*---------------------------------------------------- */
+
+const addressRef = ref()
+const copyInviteLinkEmit = () => {
+  console.log('copyInviteLinkEmit')
+  alert('copyInviteLinkEmit')
+}
+const HandleAddress = () => {
+  addressRef.value.show({
+    // subTitle: subtitle
+    showSubTitle: true
+  })
+}
+const addressEdit = () => {
+  addressRef.value.showForm({
+
+  })
+}
+
 const visible = ref(false)
 const msg = ref('hello world')
 const info = ref()

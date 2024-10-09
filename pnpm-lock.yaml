@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@ant-design/icons-vue':
+        specifier: ^7.0.1
+        version: 7.0.1(vue@3.3.13)
       vue:
         specifier: 3.3.13
         version: 3.3.13(typescript@4.9.5)
@@ -169,7 +172,14 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0
 
-  packages/aa: {}
+  packages/address:
+    dependencies:
+      '@ant-design/icons-vue':
+        specifier: ^7.0.1
+        version: 7.0.1
+      '@demo-ui-lib/utils':
+        specifier: workspace:^1.0.0
+        version: link:../utils
 
   packages/consultant-information:
     dependencies:
@@ -194,6 +204,9 @@ importers:
 
   packages/demo-ui-lib:
     dependencies:
+      '@demo-ui-lib/address':
+        specifier: workspace:^1.0.0
+        version: link:../address
       '@demo-ui-lib/consultant-information':
         specifier: workspace:^1.0.0
         version: link:../consultant-information
@@ -239,12 +252,6 @@ importers:
         version: link:../utils
 
   packages/promise-confirm:
-    dependencies:
-      '@demo-ui-lib/utils':
-        specifier: workspace:^1.0.0
-        version: link:../utils
-
-  packages/test:
     dependencies:
       '@demo-ui-lib/utils':
         specifier: workspace:^1.0.0
@@ -426,6 +433,16 @@ packages:
     dependencies:
       '@ant-design/colors': 6.0.0
       '@ant-design/icons-svg': 4.4.2
+    dev: false
+
+  /@ant-design/icons-vue@7.0.1(vue@3.3.13):
+    resolution: {integrity: sha512-eCqY2unfZK6Fe02AwFlDHLfoyEFreP6rBwAZMIJ1LugmfMiVgwWDYlp1YsRugaPtICYOabV1iWxXdP12u9U43Q==}
+    peerDependencies:
+      vue: '>=3.0.3'
+    dependencies:
+      '@ant-design/colors': 6.0.0
+      '@ant-design/icons-svg': 4.4.2
+      vue: 3.3.13(typescript@4.9.5)
     dev: false
 
   /@babel/code-frame@7.24.7:
