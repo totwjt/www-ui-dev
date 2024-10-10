@@ -73,7 +73,7 @@
           id="addressList"
           style="overflow-y: scroll"
         >
-        {{ addressList }}
+
           <template
             v-for="(item, index) in addressList"
             :key="index"
