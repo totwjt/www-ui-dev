@@ -5,7 +5,7 @@
       :title="renderTitle"
       width="50%"
       @close="cancel"
-      :destroy-on-close="true"
+      destroy-on-close
     >
       <!-- <div class="h-100" > -->
       <!-- <template #closeIcon>
@@ -21,7 +21,13 @@
 
       <template #footer v-if="!visibleForm">
         <div class="flex row-between col-center pl10 pr20">
-          <a-pagination v-model:current="current" :total="50" show-less-items />
+
+          <a-pagination
+            @change="changePagination"
+            v-model:current="addressPaginationCon.current"
+            simple :total="addressPaginationCon.total"
+          />
+
           <div class="flex row-end col-center">
             <a-typography-text class="pr20" type="danger"
               >“选择一个地址”</a-typography-text
@@ -40,7 +46,6 @@
         class="address-content h-100 w-100 relative flex-column row-left col-top"
         style="overflow: hidden"
       >
-
         <div class="w-100">
           <slot name="header1"></slot>
           <slot name="header2"></slot>
@@ -49,24 +54,34 @@
         <!-- <a-affix :target="() => addressContentRef"> -->
         <div class="w-100 flex row-between col-center mb10">
           <a-input
-            v-model:value="userName"
+            size="large"
+            v-model:value="addressParams.searchContent"
             placeholder="请输入收货人姓名或手机号搜索"
+            @change="onChange"
+            @pressEnter="onChange"
           >
-            <template #prefix>
-              <search-outlined />
+            <template #addonBefore>
+              <loading-outlined v-if="searchLoading" />
+              <search-outlined v-else />
             </template>
           </a-input>
         </div>
         <!-- </a-affix> -->
 
         <div
-          ref="addressList"
-          class="address-list w-100 flex-1"
+          class="address-list w-100 flex-1 pr10"
           id="addressList"
           style="overflow-y: scroll"
         >
-          <item class="mb10" v-for="item in 30" :key="item" />
+          <item
+            class="mb10"
+            v-for="(item, index) in addressList"
+            :key="index"
+            :item="item"
+            @operateClick="operateClick"
+          />
         </div>
+        <!-- </a-spin> -->
       </div>
     </a-drawer>
 
@@ -90,16 +105,17 @@
 </template>
 
 <script lang="ts" setup name="www-address">
-import { ref, defineProps, defineExpose, computed, h, defineEmits } from 'vue'
-import { addressProps, AddrConfig } from './types'
+import { ref, defineProps, defineExpose, computed, watch, h, defineEmits } from 'vue'
+import { addressProps, AddrConfig, IAddressRes, IAddressParams } from './types'
 import {
   SearchOutlined,
   PlusOutlined,
-  CheckOutlined
+  CheckOutlined,
+  LoadingOutlined
 } from '@ant-design/icons-vue'
 import item from './components/addr-items.vue'
 
-const emits = defineEmits(['copyInviteLinkEmit'])
+const emits = defineEmits(['copyInviteLinkEmit', 'searchEmit'])
 
 const addressContentRef = ref(null)
 
@@ -107,6 +123,7 @@ defineProps(addressProps)
 const visible = ref(false)
 const visibleForm = ref(false)
 const showSubTitle = ref(false) // 控制是否显示 subTitle
+const addressRes = ref(<IAddressRes>{})
 
 const disabled = ref(true)
 
@@ -124,7 +141,11 @@ subTitle.value = h('div', { style: { fontSize: '13px' } }, [
     'span',
     {
       onClick: copyInviteLink,
-      style: { cursor: 'pointer', textDecoration: 'underline', color: '#1890ff' }
+      style: {
+        cursor: 'pointer',
+        textDecoration: 'underline',
+        color: '#1890ff'
+      }
     },
     '点击复制邀请链接'
   ),
@@ -134,19 +155,83 @@ subTitle.value = h('div', { style: { fontSize: '13px' } }, [
 const renderTitle = computed(() => {
   return h(
     'div',
-    { style: { display: 'flex', alignItems: 'center', justifyContent: 'flex-start' } },
+    {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+      }
+    },
     [
       h('span', { style: { marginRight: '8px' } }, title.value), // title 部分
-      showSubTitle.value && h('span', { style: { marginLeft: '8px' } }, subTitle.value) // 根据 showSubTitle 动态渲染 subTitle
+      showSubTitle.value &&
+        h('span', { style: { marginLeft: '8px' } }, subTitle.value) // 根据 showSubTitle 动态渲染 subTitle
     ]
   )
 })
 
-const show = (config:AddrConfig) => {
+/* ----------------------------------------------------*\
+｜                       搜索
+\*---------------------------------------------------- */
+const addressParams = ref(<IAddressParams>{})
+const searchLoading = ref(false)
+
+// input search
+const onChange = __debounce((e) => {
+  console.log('search', e?.target?.value)
+
+  addressParams.value.searchContent = e?.target?.value
+  emits('searchEmit', addressParams.value)
+  searchLoading.value = true
+}, 300)
+
+// 按钮操作
+const operateClick = (e) => {
+  console.log('operateClick', e)
+}
+
+/* ----------------------------------------------------*\
+｜                      列表
+\*---------------------------------------------------- */
+
+const addressList = computed(() => {
+  return addressRes.value?.records || []
+})
+
+/* ----------------------------------------------------*\
+｜                       分页
+\*---------------------------------------------------- */
+
+const addressPaginationCon = ref({
+  current: 1,
+  total: 0,
+  pageSize: 10
+})
+watch(() => addressRes.value, val => {
+  addressPaginationCon.value.current = val?.current || 1
+  addressPaginationCon.value.total = val?.total || 0
+  addressPaginationCon.value.pageSize = val?.size || 10
+})
+
+// 分页 change
+const changePagination = (page, pageSize) => {
+  addressParams.value.curPage = page
+  addressParams.value.pageSize = pageSize
+  emits('searchEmit', addressParams.value)
+}
+
+/* ----------------------------------------------------*\
+｜                       导出方法
+\*---------------------------------------------------- */
+
+// 打开地址
+const show = (config: AddrConfig) => {
   console.log('config', config)
   visible.value = true
   showSubTitle.value = config?.showSubTitle || false
   if ('subTitle' in config) subTitle.value = config.subTitle
+  if ('addressParams' in config) addressParams.value = config.addressParams || {}
+  if ('addressRes' in config) addressRes.value = config.addressRes || {}
 }
 
 const cancel = () => {
@@ -156,21 +241,27 @@ const cancel = () => {
 const showForm = () => {
   visibleForm.value = true
 }
-defineExpose({ show, cancel, showForm })
 
-// test
-const current = ref(0)
-const userName = ref('')
+const setAddressRes = (res: IAddressRes) => {
+  addressRes.value = res
+}
 
+defineExpose({ show, cancel, showForm, setAddressRes })
+
+function __debounce (fn: (...args: any[]) => void, delay: number) {
+  let timer: ReturnType<typeof setTimeout>
+  return (...args: any[]) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => fn(...args), delay)
+  }
+}
 </script>
 
 <style scoped lang="scss">
 .www-address {
-
   :deep(.ant-drawer-close) {
     position: absolute;
     right: 0;
   }
-
 }
 </style>

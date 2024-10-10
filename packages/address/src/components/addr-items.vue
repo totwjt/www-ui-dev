@@ -1,20 +1,19 @@
 <template>
-  <div>
+  <div class="address-item">
     <a-descriptions
       bordered
       :column="4"
-      @click.stop="chooseId = '1234'"
       size="small"
       class="contentClass"
       :labelStyle="contentStyle"
       :contentStyle="contentStyle"
     >
       <a-descriptions-item :label="null" :span="2"
-        >章三名字</a-descriptions-item
+        >{{props.item.receiverName}}</a-descriptions-item
       >
-      <a-descriptions-item :span="2">17363277123</a-descriptions-item>
+      <a-descriptions-item :span="2">{{props.item.receiverPhone}}</a-descriptions-item>
       <a-descriptions-item :span="4"
-        >北京市朝阳区大院刚到手 大师对哈速度哈扫地机取货</a-descriptions-item
+        >{{props.item.address}}</a-descriptions-item
       >
       <a-descriptions-item :span="4">
         <div class="btns w-100 flex row-between col-center">
@@ -74,13 +73,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, defineEmits } from 'vue'
 import { DeleteOutlined, EditOutlined, CheckSquareOutlined } from '@ant-design/icons-vue'
+
+const props = defineProps({
+  item: {
+    type: Object,
+    default: () => {}
+  }
+})
 const checked = ref(true)
 const chooseId = ref('123')
 
 const contentStyle = computed(() => {
-  const bgColor = chooseId.value === '1234' ? '#419cff' : '#f9f9f9'
+  const bgColor = chooseId.value === '1234' ? '#419cff' : '#fafafa'
   const color = chooseId.value === '1234' ? 'white' : '#000000d9'
 
   return {
@@ -90,13 +96,21 @@ const contentStyle = computed(() => {
   }
 })
 
+const emits = defineEmits(['operateClick'])
+
 const operateClick = (type: string) => {
-  alert(type)
+  emits('operateClick', Object.assign({ operateType: type }, props.item))
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .contentClass:hover {
   background-color: #f9f9f9;
+}
+
+.address-item{
+  :global(.ant-descriptions-view){
+    box-shadow: 2px 1px 4px 1px rgba(0, 0, 0, 0.2);
+  }
 }
 </style>

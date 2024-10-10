@@ -38,7 +38,11 @@
 
     <h1>地址管理</h1>
     <a-button @click="HandleAddress">地址管理</a-button>
-    <www-address ref="addressRef" @copyInviteLinkEmit="copyInviteLinkEmit">
+    <www-address
+      ref="addressRef"
+      @copyInviteLinkEmit="copyInviteLinkEmit"
+      @searchEmit="searchEmit"
+    >
       <template #header1>
         <div class="flex row-between col-center pb20 m10">
           <div>
@@ -66,12 +70,213 @@ const copyInviteLinkEmit = () => {
   console.log('copyInviteLinkEmit')
   alert('copyInviteLinkEmit')
 }
+export type IAddressParams = Partial<{
+    wxUserId: string,
+    searchContent: string,
+    curPage: number,
+    pageSize: number
+}>
+const addressParams = ref(<IAddressParams>{
+  curPage: 1,
+  pageSize: 10
+})
+
 const HandleAddress = () => {
   addressRef.value.show({
     // subTitle: subtitle
-    showSubTitle: true
+    showSubTitle: true,
+    addressParams: addressParams.value,
+    addressRes: {
+      records: [
+        {
+          id: '1021143954072010752',
+          wxUserId: '858021512001617920',
+          receiverName: '张荣俊',
+          receiverPhone: '15090245575',
+          provinceCode: 110000,
+          provinceName: '北京市',
+          cityCode: 110100,
+          cityName: '市辖区',
+          countryCode: 110102,
+          countryName: '西城区',
+          address: '不合法的v你扣税的接口v监控数据库v金克斯金克斯v',
+          createTime: 1723626156219,
+          deleted: 0,
+          houseNumber: '',
+          hasDefAddress: 0
+        },
+        {
+          id: '1036330279909720064',
+          wxUserId: '858021512001617920',
+          receiverName: '沈笑民',
+          receiverPhone: '13141220726',
+          provinceCode: 110000,
+          provinceName: '北京市',
+          cityCode: 110100,
+          cityName: '市辖区',
+          countryCode: 110105,
+          countryName: '朝阳区',
+          address: '麦子店街道天元港中心B座B803',
+          createTime: 1727246858447,
+          deleted: 0,
+          houseNumber: '',
+          hasDefAddress: 0
+        },
+        {
+          id: '1002629059382870016',
+          wxUserId: '858021512001617920',
+          receiverName: '沈笑民',
+          receiverPhone: '13141220726',
+          provinceCode: 110000,
+          provinceName: '北京市',
+          cityCode: 110100,
+          cityName: '市辖区',
+          countryCode: 110105,
+          countryName: '朝阳区',
+          address: '麦子店街道天元港中心',
+          createTime: 1719211861335,
+          deleted: 0,
+          houseNumber: '',
+          hasDefAddress: 0
+        },
+        {
+          id: '1036285166294663168',
+          wxUserId: '858021512001617920',
+          receiverName: '沈笑民',
+          receiverPhone: '13141220726',
+          provinceCode: 110000,
+          provinceName: '北京市',
+          cityCode: 110100,
+          cityName: '市辖区',
+          countryCode: 110105,
+          countryName: '朝阳区',
+          address: '麦子店街道天元港中心B座B803',
+          createTime: 1727236102523,
+          deleted: 0,
+          houseNumber: '',
+          hasDefAddress: 0
+        },
+        {
+          id: '927550823855030272',
+          wxUserId: '858021512001617920',
+          receiverName: '测试',
+          receiverPhone: '13141220726',
+          provinceCode: 110000,
+          provinceName: '北京市',
+          cityCode: 110100,
+          cityName: '市辖区',
+          countryCode: 110101,
+          countryName: '东城区',
+          address: '1321321',
+          createTime: 1701311815099,
+          deleted: 0,
+          houseNumber: '',
+          hasDefAddress: 0
+        },
+        {
+          id: '941788786637930496',
+          wxUserId: '858021512001617920',
+          receiverName: '131412207426',
+          receiverPhone: '16666666666',
+          provinceCode: 120000,
+          provinceName: '天津市',
+          cityCode: 120100,
+          cityName: '市辖区',
+          countryCode: 120101,
+          countryName: '和平区',
+          address: '11111',
+          createTime: 1704706409955,
+          deleted: 0,
+          houseNumber: '',
+          hasDefAddress: 0
+        },
+        {
+          id: '950570839596597248',
+          wxUserId: '858021512001617920',
+          receiverName: '测试',
+          receiverPhone: '13141222222',
+          provinceCode: 110000,
+          provinceName: '北京市',
+          cityCode: 110100,
+          cityName: '市辖区',
+          countryCode: 110101,
+          countryName: '东城区',
+          address: '超出',
+          createTime: 1706800214543,
+          deleted: 0,
+          houseNumber: '',
+          hasDefAddress: 0
+        },
+        {
+          id: '927632149413101568',
+          wxUserId: '858021512001617920',
+          receiverName: '测试',
+          receiverPhone: '13141220726',
+          provinceCode: 110000,
+          provinceName: '北京市',
+          cityCode: 110100,
+          cityName: '市辖区',
+          countryCode: 110101,
+          countryName: '东城区',
+          address: '12132',
+          createTime: 1701331204623,
+          deleted: 0,
+          houseNumber: '',
+          hasDefAddress: 0
+        },
+        {
+          id: '909898105481068544',
+          wxUserId: '858021512001617920',
+          receiverName: '测试',
+          receiverPhone: '13141220726',
+          provinceCode: 110000,
+          provinceName: '北京市',
+          cityCode: 110100,
+          cityName: '市辖区',
+          countryCode: 110101,
+          countryName: '东城区',
+          address: '1234',
+          createTime: 1697103079067,
+          deleted: 0,
+          houseNumber: '',
+          hasDefAddress: 0
+        },
+        {
+          id: '1035628956713222144',
+          wxUserId: '858021512001617920',
+          receiverName: '沈笑民',
+          receiverPhone: '13141220726',
+          provinceCode: 110000,
+          provinceName: '北京市',
+          cityCode: 110100,
+          cityName: '市辖区',
+          countryCode: 110105,
+          countryName: '朝阳区',
+          address: '麦子店街道天元港中心B座8103',
+          createTime: 1727079649967,
+          deleted: 0,
+          houseNumber: '',
+          hasDefAddress: 0
+        }
+      ],
+      total: 52,
+      size: 10,
+      current: 1,
+      orders: [],
+      optimizeCountSql: true,
+      hitCount: false,
+      countId: null,
+      maxLimit: null,
+      searchCount: true,
+      pages: 6
+    }
   })
 }
+
+const searchEmit = (e) => {
+  console.log('searchEmit', e)
+}
+
 const addressEdit = () => {
   addressRef.value.showForm({
 
