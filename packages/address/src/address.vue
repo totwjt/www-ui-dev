@@ -73,13 +73,17 @@
           id="addressList"
           style="overflow-y: scroll"
         >
-          <item
-            class="mb10"
+        {{ addressList }}
+          <template
             v-for="(item, index) in addressList"
             :key="index"
-            :item="item"
-            @operateClick="operateClick"
-          />
+          >
+            <address-item
+              class="mb10"
+              :item="item"
+              @operateClick="operateClick"
+            />
+          </template>
         </div>
         <!-- </a-spin> -->
       </div>
@@ -113,7 +117,7 @@ import {
   CheckOutlined,
   LoadingOutlined
 } from '@ant-design/icons-vue'
-import item from './components/addr-items.vue'
+import addressItem from './components/addr-items.vue'
 
 const emits = defineEmits(['copyInviteLinkEmit', 'searchEmit'])
 
