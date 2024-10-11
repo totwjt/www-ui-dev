@@ -188,6 +188,7 @@ const onChange = __debounce((e) => {
   console.log('search', e?.target?.value)
 
   addressParams.value.searchContent = e?.target?.value
+  addressParams.value.curPage = 1
   emits('searchEmit', addressParams.value)
   searchLoading.value = true
 }, 300)
