@@ -13,7 +13,7 @@
       </template> -->
 
       <template #extra>
-        <a-button class="ml10" type="primary" @click="visibleForm = true">
+        <a-button class="ml10" size="large" type="primary" @click="visibleForm = true">
           <template #icon><plus-outlined /></template>
           新增地址
         </a-button>
@@ -25,7 +25,9 @@
           <a-pagination
             @change="changePagination"
             v-model:current="addressPaginationCon.current"
-            simple :total="addressPaginationCon.total"
+            :total="addressPaginationCon.total"
+            show-less-items
+            show-quick-jumper
           />
 
           <div class="flex row-end col-center">
@@ -46,7 +48,7 @@
         class="address-content h-100 w-100 relative flex-column row-left col-top"
         style="overflow: hidden"
       >
-        <div class="w-100">
+        <div class="w-100 mb10" style="background-color: #fafafa">
           <slot name="header1"></slot>
           <slot name="header2"></slot>
         </div>
@@ -59,6 +61,7 @@
             placeholder="请输入收货人姓名或手机号搜索"
             @change="onChange"
             @pressEnter="onChange"
+            allowClear
           >
             <template #addonBefore>
               <loading-outlined v-if="searchLoading" />
@@ -212,6 +215,7 @@ const addressPaginationCon = ref({
   pageSize: 10
 })
 watch(() => addressRes.value, val => {
+  console.log('addressPaginationCon', val)
   addressPaginationCon.value.current = val?.current || 1
   addressPaginationCon.value.total = val?.total || 0
   addressPaginationCon.value.pageSize = val?.size || 10
