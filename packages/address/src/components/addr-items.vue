@@ -8,13 +8,15 @@
       :labelStyle="contentStyle"
       :contentStyle="contentStyle"
     >
-      <a-descriptions-item :label="null" :span="2"
-        >{{props.item.receiverName}}</a-descriptions-item
-      >
-      <a-descriptions-item :span="2">{{props.item.receiverPhone}}</a-descriptions-item>
-      <a-descriptions-item :span="4"
-        >{{props.item.address}}</a-descriptions-item
-      >
+      <a-descriptions-item :label="null" :span="2">{{
+        props.item.receiverName
+      }}</a-descriptions-item>
+      <a-descriptions-item :span="2">{{
+        props.item.receiverPhone
+      }}</a-descriptions-item>
+      <a-descriptions-item :span="4">{{
+        props.item.address
+      }}</a-descriptions-item>
       <a-descriptions-item :span="4">
         <div class="btns w-100 flex row-between col-center">
           <a-checkbox
@@ -35,12 +37,7 @@
                   <p>确定此操作？</p>
                 </template>
 
-                <a-button
-                  size="default"
-                  type="primary"
-                  danger
-                  @click.stop
-                >
+                <a-button size="default" type="primary" danger @click.stop>
                   <template #icon><delete-outlined /></template>
                   删除
                 </a-button>
@@ -55,15 +52,26 @@
                 修改
               </a-button>
 
-              <a-button
-                size="default"
-                type="text"
-                style="background-color: orange; color: #fff"
-                @click.stop="operateClick('update')"
+              <a-popconfirm
+                placement="leftBottom"
+                ok-text="Yes"
+                cancel-text="No"
+                @confirm="operateClick('choose')"
               >
-                <template #icon><check-square-outlined /></template>
-                使用
-              </a-button>
+                <template #title>
+                  <h4>确认:</h4>
+                  <p>已与患者确认<span style="color:#00B3EF">使用该收药地址</span>？</p>
+                </template>
+
+                <a-button
+                  size="default"
+                  type="text"
+                  style="background-color: orange; color: #fff"
+                >
+                  <template #icon><check-square-outlined /></template>
+                  使用
+                </a-button>
+              </a-popconfirm>
             </a-space>
           </div>
         </div>
@@ -74,7 +82,11 @@
 
 <script setup lang="ts">
 import { ref, computed, defineEmits } from 'vue'
-import { DeleteOutlined, EditOutlined, CheckSquareOutlined } from '@ant-design/icons-vue'
+import {
+  DeleteOutlined,
+  EditOutlined,
+  CheckSquareOutlined
+} from '@ant-design/icons-vue'
 
 const props = defineProps({
   item: {
@@ -108,8 +120,8 @@ const operateClick = (type: string) => {
   background-color: #f9f9f9;
 }
 
-.address-item{
-  :global(.ant-descriptions-view){
+.address-item {
+  :global(.ant-descriptions-view) {
     box-shadow: 2px 1px 4px 1px rgba(0, 0, 0, 0.2);
   }
 }

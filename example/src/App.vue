@@ -43,6 +43,7 @@
       @copyInviteLinkEmit="copyInviteLinkEmit"
       @searchEmit="searchEmit"
       @operateClickEmit="operateClickEmit"
+      @searchCompleteEmit="searchCompleteEmit"
     >
       <template #header1>
         <div class="flex row-between col-center pb20 m10">
@@ -281,6 +282,9 @@ const searchEmit = (e) => {
 }
 const operateClickEmit = e => {
   console.log('operateClickEmit', e)
+}
+const searchCompleteEmit = e => {
+  console.log('searchCompleteEmit', e)
 }
 const addressEdit = () => {
   addressRef.value.showForm({

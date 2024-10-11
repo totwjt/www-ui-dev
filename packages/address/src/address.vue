@@ -31,13 +31,15 @@
           />
 
           <div class="flex row-end col-center">
-            <a-typography-text class="pr20" type="danger"
+            <!-- <a-typography-text class="pr20" type="danger"
               >“选择一个地址”</a-typography-text
-            >
-            <a-button size="large" type="primary" :disabled="disabled">
-              <template #icon><check-outlined /></template>
-              确定
-            </a-button>
+            > -->
+            <!-- <a-button size="large" type="primary" >
+              <template #icon>
+                <CloseOutlined />
+              </template>
+              关闭
+            </a-button> -->
           </div>
         </div>
       </template>
@@ -106,7 +108,9 @@
       :drawerStyle="{ border: '1px solid #eee' }"
       :maskClosable="false"
     >
-      <p>Some contents...</p>
+      <addr-form
+        @onSearchCompleteEmit="onSearchCompleteEmit"
+      />
     </a-drawer>
   </div>
 </template>
@@ -117,12 +121,14 @@ import { addressProps, AddrConfig, IAddressRes, IAddressParams } from './types'
 import {
   SearchOutlined,
   PlusOutlined,
-  CheckOutlined,
   LoadingOutlined
 } from '@ant-design/icons-vue'
 import addressItem from './components/addr-items.vue'
+import addrForm from './components/addr-form.vue'
 
-const emits = defineEmits(['copyInviteLinkEmit', 'searchEmit', 'operateClickEmit'])
+const emits = defineEmits(
+  ['copyInviteLinkEmit', 'searchEmit', 'operateClickEmit', 'completeEmit', 'searchCompleteEmit']
+)
 
 const addressContentRef = ref(null)
 
@@ -131,8 +137,6 @@ const visible = ref(false)
 const visibleForm = ref(false)
 const showSubTitle = ref(false) // 控制是否显示 subTitle
 const addressRes = ref(<IAddressRes>{})
-
-const disabled = ref(true)
 
 const copyInviteLink = () => {
   console.log('复制邀请链接')
@@ -231,6 +235,14 @@ const changePagination = (page, pageSize) => {
 }
 
 /* ----------------------------------------------------*\
+｜                      新增&编辑地址
+\*---------------------------------------------------- */
+
+const onSearchCompleteEmit = (v) => {
+  emits('searchCompleteEmit', v)
+}
+
+/* ----------------------------------------------------*\
 ｜                       导出方法
 \*---------------------------------------------------- */
 
@@ -248,6 +260,7 @@ const cancel = () => {
   visible.value = false
 }
 
+// 新增 & 编辑
 const showForm = () => {
   visibleForm.value = true
 }
