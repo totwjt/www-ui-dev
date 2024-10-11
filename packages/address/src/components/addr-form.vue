@@ -126,6 +126,11 @@ const onSubmit = () => {
     })
 }
 
+// 粘贴板
+const addressRecognitionHandler = () => {
+  // todo.addressRecognitionHandler
+}
+
 // 导出
 const set = (item: IAddressItem) => {
   addressItem.value = item
