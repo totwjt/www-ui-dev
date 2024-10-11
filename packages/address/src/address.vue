@@ -122,7 +122,7 @@ import {
 } from '@ant-design/icons-vue'
 import addressItem from './components/addr-items.vue'
 
-const emits = defineEmits(['copyInviteLinkEmit', 'searchEmit'])
+const emits = defineEmits(['copyInviteLinkEmit', 'searchEmit', 'operateClickEmit'])
 
 const addressContentRef = ref(null)
 
@@ -196,6 +196,7 @@ const onChange = __debounce((e) => {
 // 按钮操作
 const operateClick = (e) => {
   console.log('operateClick', e)
+  emits('operateClickEmit', e)
 }
 
 /* ----------------------------------------------------*\

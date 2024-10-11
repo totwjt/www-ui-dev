@@ -42,6 +42,7 @@
       ref="addressRef"
       @copyInviteLinkEmit="copyInviteLinkEmit"
       @searchEmit="searchEmit"
+      @operateClickEmit="operateClickEmit"
     >
       <template #header1>
         <div class="flex row-between col-center pb20 m10">
@@ -278,7 +279,9 @@ const HandleAddress = () => {
 const searchEmit = (e) => {
   console.log('searchEmit', e)
 }
-
+const operateClickEmit = e => {
+  console.log('operateClickEmit', e)
+}
 const addressEdit = () => {
   addressRef.value.showForm({
 
