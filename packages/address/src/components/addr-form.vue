@@ -33,8 +33,9 @@
 
       <a-form-item
         label="收件地"
-        name="location"
-        :rules="[{ validator: validateLocation, trigger: 'change' }]"
+        name="cityCode"
+        class="validateLocation"
+        :rules="[{ required: true, message: '收件地必填' },{ validator: validateLocation, trigger: 'change' }]"
       >
         <!-- 使用 slot -->
         <slot name="locationName" />
@@ -172,6 +173,7 @@ const onSubmit = () => {
 // 导出
 const set = (item: IAddressItem) => {
   addressForm.value = Object.assign(addressForm.value, item)
+  formRef.value?.validate()
   console.log('addressForm.value', addressForm.value)
 }
 
