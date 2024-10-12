@@ -109,8 +109,21 @@
       :maskClosable="false"
     >
       <addr-form
+        ref="addrFormRef"
+        :completeOptions="completeOptions"
         @onSearchCompleteEmit="onSearchCompleteEmit"
-      />
+        @onFormSubmitEmit="onFormSubmitEmit"
+      >
+
+        <template #locationName>
+          <slot name="locationName"></slot>
+        </template>
+
+        <template #addressRecognition>
+          <slot name="addressRecognition"></slot>
+        </template>
+
+      </addr-form>
     </a-drawer>
   </div>
 </template>
@@ -127,7 +140,14 @@ import addressItem from './components/addr-items.vue'
 import addrForm from './components/addr-form.vue'
 
 const emits = defineEmits(
-  ['copyInviteLinkEmit', 'searchEmit', 'operateClickEmit', 'completeEmit', 'searchCompleteEmit']
+  [
+    'copyInviteLinkEmit',
+    'searchEmit',
+    'operateClickEmit',
+    'completeEmit',
+    'searchCompleteEmit',
+    'formSubmitEmit'
+  ]
 )
 
 const addressContentRef = ref(null)
@@ -269,7 +289,29 @@ const setAddressRes = (res: IAddressRes) => {
   addressRes.value = res
 }
 
-defineExpose({ show, cancel, showForm, setAddressRes })
+const onFormSubmitEmit = (addressForm) => {
+  emits('formSubmitEmit', addressForm)
+}
+
+const completeOptions = ref([])
+const setOptions = options => {
+  if ('completeOptions' in options) completeOptions.value = options.completeOptions
+}
+
+// 地址联动
+const addrFormRef = ref()
+const setAddressForm = (addressForm) => {
+  addrFormRef.value.set(addressForm)
+}
+
+defineExpose({
+  show,
+  cancel,
+  showForm,
+  setAddressRes,
+  setOptions,
+  setAddressForm
+})
 
 function __debounce (fn: (...args: any[]) => void, delay: number) {
   let timer: ReturnType<typeof setTimeout>

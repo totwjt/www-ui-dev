@@ -1,8 +1,7 @@
 <template>
   <div class="address-form">
     <a-form
-      style="max-width: 600px"
-      :model="addressItem"
+      :model="addressForm"
       :rules="rules"
       ref="formRef"
       :label-col="{ span: 4 }"
@@ -11,10 +10,10 @@
       <a-form-item
         label="收件人"
         name="receiverName"
-        :rules="[{ required: true, message: '请输入收件人' }]"
+        :rules="[{ required: true, message: '请选择收件人' }]"
       >
         <a-input
-          v-model:value="addressItem.receiverName"
+          v-model:value="addressForm.receiverName"
           maxlength="20"
           placeholder="请输入收件人"
         />
@@ -26,7 +25,7 @@
         :rules="[{ required: true, message: '请输入手机号' }]"
       >
         <a-input
-          v-model:value="addressItem.receiverPhone"
+          v-model:value="addressForm.receiverPhone"
           maxlength="11"
           placeholder="请输入手机号"
         />
@@ -35,13 +34,15 @@
       <a-form-item
         label="收件地"
         name="location"
-        :rules="[{ required: true, message: '请选择收件地' }]"
+        :rules="[{ validator: validateLocation, trigger: 'change' }]"
       >
+        <!-- 使用 slot -->
+        <slot name="locationName" />
         <!-- <locationName
             ref="locationNameRef"
             v-model:areaCodeData="location"
             v-model:areaNameData="includeLabelData"
-          /> -->
+        /> -->
       </a-form-item>
 
       <a-form-item
@@ -50,35 +51,60 @@
         :rules="[{ required: true, message: '请输入详细街道地址' }]"
       >
         <a-auto-complete
-          v-model:value="addressItem.address"
-          :options="completeOptions"
+          v-model:value="addressForm.address"
+          :options="props.completeOptions"
+          :field-names="{ label: 'title', value: 'title' }"
           style="width: 400px"
           placeholder="请输入详细地址"
+          @change="onChangeComplete"
           @select="onSelectComplete"
           @search="onSearchComplete"
-        />
+        >
+          <template #option="{ title, address }">
+            {{ title }} - {{ address }}
+          </template>
+        </a-auto-complete>
       </a-form-item>
 
       <a-form-item label="门牌号" name="houseNumber">
         <a-input
-          v-model:value="addressItem.houseNumber"
+          v-model:value="addressForm.houseNumber"
           maxlength="50"
-          placeholder="请输入，例1号楼1单元101"
+          placeholder="选填，例1号楼1单元101"
         />
       </a-form-item>
 
       <a-form-item label="地址粘贴板">
-        <AddressRecognition
+        <slot name="addressRecognition"></slot>
+        <!-- <AddressRecognition
           ref="AddressRecognitionRef"
           @onChange="addressRecognitionHandler"
           :autoSize="{ minRows: 4, maxRows: 8 }"
           style="width: 315px; background-color: #f9f9f9"
-        />
+        /> -->
+      </a-form-item>
+
+      <a-form-item name="hasDefAddress" style="padding-left: 86px">
+        <a-checkbox
+          :checked="addressForm.hasDefAddress == 1"
+          @change="
+            (e) => (addressForm.hasDefAddress = e.target.checked ? 1 : 0)
+          "
+        >
+          设为默认地址
+        </a-checkbox>
       </a-form-item>
     </a-form>
 
-    <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-      <a-button type="primary" @click.prevent="onSubmit">保存</a-button>
+    <a-form-item class="text-center">
+      <a-button
+        style="max-width: 80%"
+        type="primary"
+        size="large"
+        block
+        @click.prevent="onSubmit"
+        >保存</a-button
+      >
     </a-form-item>
   </div>
 </template>
@@ -87,11 +113,18 @@ import { ref, defineExpose, defineEmits } from 'vue'
 import { IAddressItem } from '../types'
 // import { Form } from 'ant-design-vue'
 
+const props = defineProps({
+  completeOptions: {
+    type: Array,
+    default: () => []
+  }
+})
+
 const formRef = ref()
-const addressItem = ref(<IAddressItem>{})
+const addressForm = ref(<IAddressItem>{})
 
 // const useForm = Form.useForm
-// const { resetFields, validate, validateInfos } = useForm(addressItem, rulesRef, {
+// const { resetFields, validate, validateInfos } = useForm(addressForm, rulesRef, {
 //   onValidate: (...args) => console.log(...args)
 // })
 
@@ -100,18 +133,28 @@ const rules = ref({
   receiverPhone: [{ required: true, message: '请输入手机号' }],
   address: [{ required: true, message: '请输入详细地址' }]
 })
+const validateLocation = (rule, value) => {
+  if (addressForm.value.cityCode && addressForm.value.countryCode && addressForm.value.provinceCode) {
+    return Promise.resolve()
+  } else return Promise.reject(new Error('收件地址不完整'))
+}
 
 // 详细地址
 const emits = defineEmits([
   'onSelectCompleteEmit',
-  'onSearchCompleteEmit'
+  'onSearchCompleteEmit',
+  'onFormSubmitEmit'
 ])
-const completeOptions = ref([])
-const onSelectComplete = (value: string) => {
-  emits('onSelectCompleteEmit', value)
+// const completeOptions = ref([])
+
+const onChangeComplete = (value) => {
+  console.log('onChangeComplete', value)
 }
-const onSearchComplete = (value: string) => {
-  console.log('onSearchComplete')
+const onSelectComplete = (value, option) => {
+  console.log('addressForm', addressForm.value)
+  console.log('onSelectComplete', value, option)
+}
+const onSearchComplete = (value) => {
   emits('onSearchCompleteEmit', value)
 }
 
@@ -119,21 +162,17 @@ const onSubmit = () => {
   formRef.value
     ?.validate()
     .then(() => {
-      // linkSave();
+      emits('onFormSubmitEmit', addressForm.value)
     })
     .catch((err) => {
       console.log('err', err)
     })
 }
 
-// 粘贴板
-const addressRecognitionHandler = () => {
-  // todo.addressRecognitionHandler
-}
-
 // 导出
 const set = (item: IAddressItem) => {
-  addressItem.value = item
+  addressForm.value = Object.assign(addressForm.value, item)
+  console.log('addressForm.value', addressForm.value)
 }
 
 defineExpose({ set })

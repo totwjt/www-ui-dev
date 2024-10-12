@@ -44,6 +44,7 @@
       @searchEmit="searchEmit"
       @operateClickEmit="operateClickEmit"
       @searchCompleteEmit="searchCompleteEmit"
+      @formSubmitEmit="formSubmitEmit"
     >
       <template #header1>
         <div class="flex row-between col-center pb20 m10">
@@ -53,6 +54,9 @@
           </div>
           <a-button @click="addressEdit">修改</a-button>
         </div>
+      </template>
+      <template #locationName>
+        <a-button @click="localName">联动插槽</a-button>
       </template>
     </www-address>
   </div>
@@ -285,11 +289,102 @@ const operateClickEmit = e => {
 }
 const searchCompleteEmit = e => {
   console.log('searchCompleteEmit', e)
+  const mockList = [{
+    id: '14418967903934252350',
+    title: '天元港中心',
+    address: '北京市朝阳区东三环北路丙2号',
+    category: '房产小区:商务楼宇',
+    type: 0,
+    location: {
+      lat: 39.955484,
+      lng: 116.460017
+    },
+    adcode: 110105,
+    province: '北京市',
+    city: '北京市',
+    district: '朝阳区'
+  }, {
+    id: '9864341959583942441',
+    title: '天元港中心B座',
+    address: '北京市朝阳区东三环北路丙2号',
+    category: '房产小区:商务楼宇',
+    type: 0,
+    location: {
+      lat: 39.955787,
+      lng: 116.459771
+    },
+    adcode: 110105,
+    province: '北京市',
+    city: '北京市',
+    district: '朝阳区'
+  }, {
+    id: '6319129007606189416',
+    title: '天元港中心A座',
+    address: '北京市朝阳区东三环北路丙2号天元港中心',
+    category: '房产小区:商务楼宇',
+    type: 0,
+    location: {
+      lat: 39.955473,
+      lng: 116.459998
+    },
+    adcode: 110105,
+    province: '北京市',
+    city: '北京市',
+    district: '朝阳区'
+  }, {
+    id: '14677772948879063340',
+    title: '天元港中心-西门',
+    address: '北京市朝阳区霞光里南街与霞光里西路交叉口西南方向64米左右',
+    category: '室内及附属设施:通行设施类:门/出入口',
+    type: 0,
+    location: {
+      lat: 39.955978,
+      lng: 116.459185
+    },
+    adcode: 110105,
+    province: '北京市',
+    city: '北京市',
+    district: '朝阳区'
+  }, {
+    id: '17920195421443566034',
+    title: '天元港中心B座-北门',
+    address: '北京市朝阳区东三环北路辅路与霞光里南街交叉口东北方向96米',
+    category: '室内及附属设施:通行设施类:外部门',
+    type: 0,
+    location: {
+      lat: 39.95582,
+      lng: 116.459496
+    },
+    adcode: 110105,
+    province: '北京市',
+    city: '北京市',
+    district: '朝阳区'
+  }]
+  addressRef.value.setOptions({
+    completeOptions: mockList
+  })
 }
 const addressEdit = () => {
   addressRef.value.showForm({
 
   })
+}
+const localName = () => {
+  addressRef.value.setAddressForm({
+    cityId: '110100',
+    cityCode: '110100',
+    cityName: '市辖区',
+    countryId: '110105',
+    countryCode: '110105',
+    countryName: '朝阳区',
+    provinceId: '110000',
+    provinceCode: '110000',
+    provinceName: '北京市'
+  })
+}
+
+const formSubmitEmit = e => {
+  console.log('formSubmitEmit', e)
 }
 
 const visible = ref(false)
