@@ -110,7 +110,7 @@
   </div>
 </template>
 <script setup lang="ts" name="addr-form">
-import { ref, defineExpose, defineEmits, watch } from 'vue'
+import { ref, defineExpose, defineEmits, watch, computed } from 'vue'
 import { IAddressItem } from '../types'
 // import { Form } from 'ant-design-vue'
 
@@ -209,8 +209,11 @@ const set = (item: IAddressItem) => {
   formRef.value?.validate()
   console.log('addressForm.value', addressForm.value)
 }
-
-watch(() => props.setAddressForm, val => {
+const setAddressForm = computed(() => {
+  return props.setAddressForm
+})
+watch(() => setAddressForm.value, val => {
+  console.log('watch setAddressForm.value', setAddressForm.value)
   set(val)
 })
 
