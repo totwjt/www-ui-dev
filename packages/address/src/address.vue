@@ -105,6 +105,7 @@
       maskStyle="background: rgba(0, 0, 0, 0.2)"
       :drawerStyle="{ border: '1px solid #eee' }"
       :maskClosable="false"
+      destroyOnClose
     >
       <addr-form
         ref="addrFormRef"

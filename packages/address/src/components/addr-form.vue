@@ -39,11 +39,7 @@
       >
         <!-- 使用 slot -->
         <slot name="locationName" />
-        <!-- <locationName
-            ref="locationNameRef"
-            v-model:areaCodeData="location"
-            v-model:areaNameData="includeLabelData"
-        /> -->
+
       </a-form-item>
 
       <a-form-item
@@ -171,6 +167,7 @@ const rules = ref({
   receiverPhone: [{ required: true, message: '请输入手机号' }],
   address: [{ required: true, message: '请输入详细地址' }]
 })
+
 const validateLocation = (rule, value) => {
   if (addressForm.value.cityCode && addressForm.value.countryCode && addressForm.value.provinceCode) {
     return Promise.resolve()

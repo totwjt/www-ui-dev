@@ -39,6 +39,7 @@
     <h1>地址管理</h1>
     <a-button @click="HandleAddress">地址管理</a-button>
     <www-address
+    :setAddressForm="setAddressForm"
       ref="addressRef"
       @copyInviteLinkEmit="copyInviteLinkEmit"
       @searchEmit="searchEmit"
@@ -70,6 +71,7 @@ import CoverFeildLog from './coverFeild.vue'
 /* ----------------------------------------------------*\
 ｜                       地址管理
 \*---------------------------------------------------- */
+const setAddressForm = ref({})
 
 const addressRef = ref()
 const copyInviteLinkEmit = () => {
