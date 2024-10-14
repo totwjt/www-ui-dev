@@ -133,6 +133,8 @@ watch(() => props.editItem, val => {
   console.log('editItem2', val)
   if (val && Object.keys(val).length) {
     addressForm.value = val
+  } else {
+    addressForm.value = {}
   }
 }, { immediate: true, deep: true })
 

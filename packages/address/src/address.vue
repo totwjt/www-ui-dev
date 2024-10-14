@@ -99,7 +99,6 @@
       v-model:visible="visibleForm"
       :get-container="'#address-content'"
       :style="{ position: 'absolute' }"
-      :destroy-on-close="true"
       height="80%"
       width="90%"
       :z-index="1050"
