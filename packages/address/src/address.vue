@@ -298,6 +298,9 @@ const setOptions = options => {
 // 地址联动
 const addrFormRef = ref()
 const setAddressForm = (addressForm) => {
+  if (!addrFormRef.value) {
+    console.error('addrFormRef is not initialized', addrFormRef.value)
+  }
   addrFormRef.value.set(addressForm)
 }
 
