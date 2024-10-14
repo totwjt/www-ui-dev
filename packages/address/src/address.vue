@@ -108,6 +108,7 @@
     >
       <addr-form
         ref="addrFormRef"
+        :setAddressForm="props.setAddressForm"
         :completeOptions="completeOptions"
         :editItem="editItem"
         @onSearchCompleteEmit="onSearchCompleteEmit"
@@ -152,7 +153,7 @@ const emits = defineEmits(
 
 const addressContentRef = ref(null)
 
-defineProps(addressProps)
+const props = defineProps(addressProps)
 const visible = ref(false)
 const visibleForm = ref(false)
 const showSubTitle = ref(false) // 控制是否显示 subTitle

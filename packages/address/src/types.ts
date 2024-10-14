@@ -4,6 +4,10 @@ export const addressProps = {
   addressRes: {
     type: Object,
     default: () => ({})
+  },
+  setAddressForm: {
+    type: Object,
+    default: () => ({})
   }
 } as const
 

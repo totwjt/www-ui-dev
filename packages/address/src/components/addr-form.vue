@@ -129,6 +129,10 @@ const props = defineProps({
   editItem: {
     type: Object,
     default: () => {}
+  },
+  setAddressForm: {
+    type: Object,
+    default: () => {}
   }
 
 })
@@ -205,6 +209,10 @@ const set = (item: IAddressItem) => {
   formRef.value?.validate()
   console.log('addressForm.value', addressForm.value)
 }
+
+watch(() => props.setAddressForm, val => {
+  set(val)
+})
 
 defineExpose({ set })
 </script>
