@@ -129,6 +129,10 @@ const props = defineProps({
   setAddressForm: {
     type: Object,
     default: () => {}
+  },
+  defaultAddress: {
+    type: String,
+    default: ''
   }
 
 })
@@ -203,7 +207,7 @@ const onSubmit = () => {
 // 导出
 const set = (item: IAddressItem) => {
   addressForm.value = Object.assign(addressForm.value, item)
-  formRef.value?.validate()
+  formRef.value?.validateFields('provinceCode')
   console.log('addressForm.value', addressForm.value)
 }
 const setAddressForm = computed(() => {

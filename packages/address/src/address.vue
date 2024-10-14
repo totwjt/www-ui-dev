@@ -85,6 +85,7 @@
             <address-item
               class="mb10"
               :item="item"
+              :defaultAddress="defaultAddress"
               @operateClick="operateClick"
             />
           </template>
@@ -111,6 +112,7 @@
         ref="addrFormRef"
         :setAddressForm="props.setAddressForm"
         :completeOptions="completeOptions"
+        :defaultAddress="defaultAddress"
         :editItem="editItem"
         @onSearchCompleteEmit="onSearchCompleteEmit"
         @onFormSubmitEmit="onFormSubmitEmit"
@@ -221,7 +223,6 @@ const onChange = __debounce((e) => {
 
 // 按钮操作
 const operateClick = (e) => {
-  console.log('operateClick', e)
   emits('operateClickEmit', e)
 }
 
@@ -264,6 +265,12 @@ const onSearchCompleteEmit = (v) => {
 }
 
 /* ----------------------------------------------------*\
+｜                     设置默认
+\*---------------------------------------------------- */
+
+const defaultAddress = ref('')
+
+/* ----------------------------------------------------*\
 ｜                       导出方法
 \*---------------------------------------------------- */
 
@@ -274,6 +281,7 @@ const show = (config: AddrConfig) => {
   if ('subTitle' in config) subTitle.value = config.subTitle
   if ('addressParams' in config) addressParams.value = config.addressParams || {}
   if ('addressRes' in config) addressRes.value = config.addressRes || {}
+  if ('defaultAddress' in config) defaultAddress.value = config.defaultAddress || ''
 }
 
 const cancel = () => {
@@ -296,6 +304,7 @@ const onFormSubmitEmit = (addressForm) => {
 const completeOptions = ref([])
 const setOptions = options => {
   if ('completeOptions' in options) completeOptions.value = options.completeOptions
+  if ('defaultAddress' in options) defaultAddress.value = options.defaultAddress
 }
 
 // 地址联动

@@ -5,8 +5,6 @@
       :column="4"
       size="small"
       class="contentClass"
-      :labelStyle="contentStyle"
-      :contentStyle="contentStyle"
     >
       <a-descriptions-item :label="null" :span="2">{{
         props.item.receiverName
@@ -20,9 +18,9 @@
       <a-descriptions-item :span="4">
         <div class="btns w-100 flex row-between col-center">
           <a-checkbox
-            :style="contentStyle"
-            v-model:checked="checked"
-            @click.stop
+            :checked="props.defaultAddress == props.item.id"
+            :value="props.item.id"
+            @change="changeDefault"
             >默认</a-checkbox
           >
           <div>
@@ -81,7 +79,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineEmits } from 'vue'
+import { ref, defineEmits, onMounted } from 'vue'
 import {
   DeleteOutlined,
   EditOutlined,
@@ -92,26 +90,46 @@ const props = defineProps({
   item: {
     type: Object,
     default: () => {}
+  },
+  defaultAddress: {
+    type: String,
+    default: ''
   }
 })
-const checked = ref(true)
-const chooseId = ref('123')
 
-const contentStyle = computed(() => {
-  const bgColor = chooseId.value === '1234' ? '#419cff' : '#fafafa'
-  const color = chooseId.value === '1234' ? 'white' : '#000000d9'
+const checkedSta = ref(false)
+const defaultAddressId = ref('')
 
-  return {
-    cursor: 'pointer',
-    backgroundColor: bgColor,
-    color
-  }
+onMounted(() => {
+  checkedSta.value = props.item.hasDefAddress === 1
+  defaultAddressId.value = props.defaultAddress
 })
+
+// const contentStyle = computed(() => {
+//   const bgColor = chooseId.value === '1234' ? '#419cff' : '#fafafa'
+//   const color = chooseId.value === '1234' ? 'white' : '#000000d9'
+
+//   return {
+//     cursor: 'pointer',
+//     backgroundColor: bgColor,
+//     color
+//   }
+// })
 
 const emits = defineEmits(['operateClick'])
 
 const operateClick = (type: string) => {
   emits('operateClick', Object.assign({ operateType: type }, props.item))
+}
+
+const changeDefault = (e) => {
+  console.log('changeDefault', e, checkedSta.value)
+  const { value } = e.target
+  if (value === defaultAddressId.value) {
+    return
+  }
+
+  operateClick('setDefault')
 }
 </script>
 

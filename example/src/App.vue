@@ -278,7 +278,8 @@ const HandleAddress = () => {
         maxLimit: null,
         searchCount: true,
         pages: 6
-      }
+      },
+      defaultAddress: '1021143954072010752'
     })
   }, 1000)
 }
@@ -290,6 +291,11 @@ const operateClickEmit = e => {
   console.log('operateClickEmit', e)
   if (e.operateType === 'update') {
     addressRef.value.showEdit(e)
+  }
+  if (e.operateType === 'setDefault') {
+    addressRef.value.setOptions({
+      defaultAddress: '1036330279909720064'
+    })
   }
 }
 const searchCompleteEmit = e => {
