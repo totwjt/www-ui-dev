@@ -5,7 +5,6 @@
       :title="renderTitle"
       width="50%"
       @close="cancel"
-      destroy-on-close
     >
       <!-- <div class="h-100" > -->
       <!-- <template #closeIcon>
@@ -13,7 +12,7 @@
       </template> -->
 
       <template #extra>
-        <a-button class="ml10" size="large" type="primary" @click="visibleForm = true">
+        <a-button class="ml10" size="large" type="primary" @click="showForm();editItem = {}">
           <template #icon><plus-outlined /></template>
           新增地址
         </a-button>
@@ -111,6 +110,7 @@
       <addr-form
         ref="addrFormRef"
         :completeOptions="completeOptions"
+        :editItem="editItem"
         @onSearchCompleteEmit="onSearchCompleteEmit"
         @onFormSubmitEmit="onFormSubmitEmit"
       >
@@ -241,7 +241,6 @@ const addressPaginationCon = ref({
   pageSize: 10
 })
 watch(() => addressRes.value, val => {
-  console.log('addressPaginationCon', val)
   addressPaginationCon.value.current = val?.current || 1
   addressPaginationCon.value.total = val?.total || 0
   addressPaginationCon.value.pageSize = val?.size || 10
@@ -268,7 +267,6 @@ const onSearchCompleteEmit = (v) => {
 
 // 打开地址
 const show = (config: AddrConfig) => {
-  console.log('config', config)
   visible.value = true
   showSubTitle.value = config?.showSubTitle || false
   if ('subTitle' in config) subTitle.value = config.subTitle
@@ -281,8 +279,8 @@ const cancel = () => {
 }
 
 // 新增 & 编辑
-const showForm = () => {
-  visibleForm.value = true
+const showForm = (sta = true) => {
+  visibleForm.value = sta
 }
 
 const setAddressRes = (res: IAddressRes) => {
@@ -304,13 +302,21 @@ const setAddressForm = (addressForm) => {
   addrFormRef.value.set(addressForm)
 }
 
+// 编辑
+const editItem = ref({})
+const showEdit = (e) => {
+  showForm()
+  editItem.value = e
+}
+
 defineExpose({
   show,
   cancel,
   showForm,
   setAddressRes,
   setOptions,
-  setAddressForm
+  setAddressForm,
+  showEdit
 })
 
 function __debounce (fn: (...args: any[]) => void, delay: number) {

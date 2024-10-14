@@ -33,7 +33,7 @@
 
       <a-form-item
         label="收件地"
-        name="cityCode"
+        name="provinceCode"
         class="validateLocation"
         :rules="[{ required: true, message: '收件地必填' },{ validator: validateLocation, trigger: 'change' }]"
       >
@@ -110,7 +110,7 @@
   </div>
 </template>
 <script setup lang="ts" name="addr-form">
-import { ref, defineExpose, defineEmits } from 'vue'
+import { ref, defineExpose, defineEmits, watch } from 'vue'
 import { IAddressItem } from '../types'
 // import { Form } from 'ant-design-vue'
 
@@ -118,11 +118,23 @@ const props = defineProps({
   completeOptions: {
     type: Array,
     default: () => []
+  },
+  editItem: {
+    type: Object,
+    default: () => {}
   }
+
 })
 
 const formRef = ref()
 const addressForm = ref(<IAddressItem>{})
+
+watch(() => props.editItem, val => {
+  console.log('editItem2', val)
+  if (val && Object.keys(val).length) {
+    addressForm.value = val
+  }
+}, { immediate: true, deep: true })
 
 // const useForm = Form.useForm
 // const { resetFields, validate, validateInfos } = useForm(addressForm, rulesRef, {

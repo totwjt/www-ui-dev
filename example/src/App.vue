@@ -286,6 +286,9 @@ const searchEmit = (e) => {
 }
 const operateClickEmit = e => {
   console.log('operateClickEmit', e)
+  if (e.operateType === 'update') {
+    addressRef.value.showEdit(e)
+  }
 }
 const searchCompleteEmit = e => {
   console.log('searchCompleteEmit', e)
@@ -385,6 +388,7 @@ const localName = () => {
 
 const formSubmitEmit = e => {
   console.log('formSubmitEmit', e)
+  addressRef.value.showForm(false)
 }
 
 const visible = ref(false)
