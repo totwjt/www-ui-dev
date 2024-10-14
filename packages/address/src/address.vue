@@ -112,6 +112,7 @@
         :editItem="editItem"
         @onSearchCompleteEmit="onSearchCompleteEmit"
         @onFormSubmitEmit="onFormSubmitEmit"
+        @locationEmit="operateClick"
       >
 
         <template #locationName>

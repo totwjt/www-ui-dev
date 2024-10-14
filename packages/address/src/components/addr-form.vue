@@ -114,6 +114,13 @@ import { ref, defineExpose, defineEmits, watch } from 'vue'
 import { IAddressItem } from '../types'
 // import { Form } from 'ant-design-vue'
 
+const emits = defineEmits([
+  'onSelectCompleteEmit',
+  'onSearchCompleteEmit',
+  'onFormSubmitEmit',
+  'locationEmit'
+])
+
 const props = defineProps({
   completeOptions: {
     type: Array,
@@ -129,10 +136,22 @@ const props = defineProps({
 const formRef = ref()
 const addressForm = ref(<IAddressItem>{})
 
+const locationFucc = (val) => {
+  const { provinceCode, provinceName, cityCode, cityName, countryCode, countryName } = val
+  emits('locationEmit', Object.assign(val, {
+    operateType: 'location',
+    location: [provinceCode, cityCode, countryCode],
+    includeLabelData: [provinceName, cityName, countryName]
+  }))
+}
+
 watch(() => props.editItem, val => {
   console.log('editItem2', val)
   if (val && Object.keys(val).length) {
     addressForm.value = val
+
+    // fixbug 实例ref可能不存在，导致报错
+    if (val?.provinceCode) locationFucc(val)
   } else {
     addressForm.value = {}
   }
@@ -155,11 +174,7 @@ const validateLocation = (rule, value) => {
 }
 
 // 详细地址
-const emits = defineEmits([
-  'onSelectCompleteEmit',
-  'onSearchCompleteEmit',
-  'onFormSubmitEmit'
-])
+
 // const completeOptions = ref([])
 
 const onChangeComplete = (value) => {
