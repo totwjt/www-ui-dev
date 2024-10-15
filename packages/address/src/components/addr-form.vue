@@ -22,7 +22,10 @@
       <a-form-item
         label="手机号"
         name="receiverPhone"
-        :rules="[{ required: true, message: '请输入手机号' }]"
+        :rules="[
+            { required: true, message: '请输入手机号' },
+            { validator: validatePhone, trigger: 'change' }
+        ]"
       >
         <a-input
           v-model:value="addressForm.receiverPhone"
@@ -176,6 +179,16 @@ const validateLocation = (rule, value) => {
   if (addressForm.value.cityCode && addressForm.value.countryCode && addressForm.value.provinceCode) {
     return Promise.resolve()
   } else return Promise.reject(new Error('收件地址不完整'))
+}
+const validatePhone = (rule, value) => {
+  const phoneRegex = /^1[3-9]\d{9}$/
+  if (!value) {
+    return Promise.reject(new Error('请输入手机号'))
+  } else if (!phoneRegex.test(value)) {
+    return Promise.reject(new Error('请输入正确的手机号'))
+  } else {
+    return Promise.resolve()
+  }
 }
 
 // 详细地址

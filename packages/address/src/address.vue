@@ -276,6 +276,7 @@ const defaultAddress = ref('')
 
 // 打开地址
 const show = (config: AddrConfig) => {
+  showForm(false)
   visible.value = true
   showSubTitle.value = config?.showSubTitle || false
   if ('subTitle' in config) subTitle.value = config.subTitle
