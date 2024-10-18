@@ -139,8 +139,8 @@ const changeDefault = (e) => {
 }
 
 .address-item {
-  :global(.ant-descriptions-view) {
-    box-shadow: 2px 1px 4px 1px rgba(0, 0, 0, 0.2);
+  :deep(.ant-descriptions-view) {
+    box-shadow: 2px 1px 3px 0px rgba(0, 0, 0, 0.2)
   }
 }
 </style>
