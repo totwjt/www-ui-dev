@@ -116,6 +116,7 @@
         :editItem="editItem"
         @onSearchCompleteEmit="onSearchCompleteEmit"
         @onSelectCompleteEmit="onSelectCompleteEmit"
+        @addressAreaEmit="addressAreaEmit"
         @onFormSubmitEmit="onFormSubmitEmit"
         @locationEmit="operateClick"
       >
@@ -152,6 +153,7 @@ const emits = defineEmits(
     'completeEmit',
     'searchCompleteEmit',
     'selectCompleteEmit',
+    'addressAreaEmit',
     'formSubmitEmit'
   ]
 )
@@ -268,6 +270,10 @@ const onSearchCompleteEmit = (v) => {
 
 const onSelectCompleteEmit = (v) => {
   emits('selectCompleteEmit', v)
+}
+
+const addressAreaEmit = e => {
+  emits('addressAreaEmit', e)
 }
 
 /* ----------------------------------------------------*\

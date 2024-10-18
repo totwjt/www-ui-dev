@@ -46,6 +46,7 @@
       @operateClickEmit="operateClickEmit"
       @searchCompleteEmit="searchCompleteEmit"
       @selectCompleteEmit="selectCompleteEmit"
+      @addressAreaEmit="addressAreaEmit"
       @formSubmitEmit="formSubmitEmit"
     >
       <template #header1>
@@ -378,6 +379,9 @@ const searchCompleteEmit = e => {
 }
 const selectCompleteEmit = e => {
   console.log('地址关键词搜索 选择', e)
+}
+const addressAreaEmit = e => {
+  console.log('addressAreaEmit', e)
 }
 const addressEdit = () => {
   addressRef.value.showForm({

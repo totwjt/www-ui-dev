@@ -126,6 +126,7 @@ const emits = defineEmits([
   'onSelectCompleteEmit',
   'onSearchCompleteEmit',
   'onFormSubmitEmit',
+  'addressAreaEmit',
   'locationEmit'
 ])
 
@@ -222,6 +223,7 @@ const onSelectComplete = (value, option) => {
   addressForm.value.provinceName = option.province
 
   emits('onSelectCompleteEmit', { value, option })
+  emits('addressAreaEmit', [codeArr, [option.province, option.city, option.district]])
 }
 function __parseAdcode (adcode) {
   const adcodeStr = String(adcode)
