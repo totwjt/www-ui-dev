@@ -39,12 +39,13 @@
     <h1>地址管理</h1>
     <a-button @click="HandleAddress">地址管理</a-button>
     <www-address
-    :setAddressForm="setAddressForm"
+      :setAddressForm="setAddressForm"
       ref="addressRef"
       @copyInviteLinkEmit="copyInviteLinkEmit"
       @searchEmit="searchEmit"
       @operateClickEmit="operateClickEmit"
       @searchCompleteEmit="searchCompleteEmit"
+      @selectCompleteEmit="selectCompleteEmit"
       @formSubmitEmit="formSubmitEmit"
     >
       <template #header1>
@@ -374,6 +375,9 @@ const searchCompleteEmit = e => {
   addressRef.value.setOptions({
     completeOptions: mockList
   })
+}
+const selectCompleteEmit = e => {
+  console.log('地址关键词搜索 选择', e)
 }
 const addressEdit = () => {
   addressRef.value.showForm({

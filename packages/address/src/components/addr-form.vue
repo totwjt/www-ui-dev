@@ -55,14 +55,23 @@
           :options="props.completeOptions"
           :field-names="{ label: 'title', value: 'title' }"
           style="width: 400px"
-          placeholder="请输入详细地址"
           @change="onChangeComplete"
           @select="onSelectComplete"
           @search="onSearchComplete"
         >
-          <template #option="{ title, address }">
-            {{ title }} - {{ address }}
-          </template>
+
+            <a-textarea
+                placeholder="请输入详细地址"
+                class="custom"
+                allowClear
+                showCount
+                :maxlength="100"
+                style="height: 50px"
+            />
+
+            <template #option="{ title, address }">
+                {{ title }} - {{ address }}
+            </template>
         </a-auto-complete>
       </a-form-item>
 
@@ -199,8 +208,52 @@ const onChangeComplete = (value) => {
   console.log('onChangeComplete', value)
 }
 const onSelectComplete = (value, option) => {
-  console.log('addressForm', addressForm.value)
   console.log('onSelectComplete', value, option)
+  addressForm.value.address = `${value}${option.address}`
+  const codeArr = __parseAdcode(option.adcode)
+  addressForm.value.address = `${value}${option.address}`
+  console.log('codeArr', codeArr)
+
+  addressForm.value.cityCode = codeArr[1]
+  addressForm.value.cityName = option.city
+  addressForm.value.countryCode = codeArr[2]
+  addressForm.value.countryName = option.district
+  addressForm.value.provinceCode = codeArr[0]
+  addressForm.value.provinceName = option.province
+
+  emits('onSelectCompleteEmit', { value, option })
+}
+function __parseAdcode (adcode) {
+  const adcodeStr = String(adcode)
+
+  // 首先进行一些基础判断，确保 adcode 是合法的6位字符串
+  if (adcodeStr.length !== 6) {
+    throw new Error('adcode必须为6位数字')
+  }
+
+  const provinceCode = adcodeStr.substring(0, 2) + '0000' // 省级编码
+  let cityCode = adcodeStr.substring(0, 4) + '00' // 市级编码
+  const districtCode = adcodeStr // 区县级编码
+
+  // 针对直辖市、特别行政区特殊处理（省和市的编码相同）
+  const directCities = ['11', '31', '50', '12', '81', '82'] // 北京(11), 上海(31), 重庆(50), 天津(12), 香港(81), 澳门(82)
+  if (directCities.includes(adcodeStr.substring(0, 2))) {
+    cityCode = provinceCode // 直辖市的市级编码和省级编码一致
+  }
+
+  // 针对省直辖县的特殊情况处理，第3、4位为90
+  if (adcodeStr.substring(2, 4) === '90') {
+    cityCode = provinceCode // 省直辖县的市级编码和省级编码一致
+  }
+
+  // 针对东莞市(441900)、中山市(442000)、儋州市(460400) 等城市进行特殊处理
+  const specialCities = ['441900', '442000', '460400', '620200']
+  if (specialCities.includes(adcodeStr)) {
+    cityCode = adcodeStr
+  }
+
+  // 最后返回省、市、区编码
+  return [Number(provinceCode), Number(cityCode), Number(districtCode)]
 }
 const onSearchComplete = (value) => {
   emits('onSearchCompleteEmit', value)

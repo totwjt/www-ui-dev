@@ -115,6 +115,7 @@
         :defaultAddress="defaultAddress"
         :editItem="editItem"
         @onSearchCompleteEmit="onSearchCompleteEmit"
+        @onSelectCompleteEmit="onSelectCompleteEmit"
         @onFormSubmitEmit="onFormSubmitEmit"
         @locationEmit="operateClick"
       >
@@ -150,6 +151,7 @@ const emits = defineEmits(
     'operateClickEmit',
     'completeEmit',
     'searchCompleteEmit',
+    'selectCompleteEmit',
     'formSubmitEmit'
   ]
 )
@@ -262,6 +264,10 @@ const changePagination = (page, pageSize) => {
 
 const onSearchCompleteEmit = (v) => {
   emits('searchCompleteEmit', v)
+}
+
+const onSelectCompleteEmit = (v) => {
+  emits('selectCompleteEmit', v)
 }
 
 /* ----------------------------------------------------*\
