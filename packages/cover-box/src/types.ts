@@ -16,6 +16,10 @@ export const coverBoxProps = {
   height: {
     type: String,
     default: '100px'
+  },
+  visible: {
+    type: Boolean,
+    default: false
   }
 } as const
 

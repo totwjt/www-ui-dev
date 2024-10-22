@@ -1,7 +1,8 @@
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import { coverBoxProps } from './types'
 import { EyeInvisibleOutlined } from '@ant-design/icons-vue'
 import stylecss from './coverbox.module.scss'
+
 const NAME = 'www-cover-box'
 
 export default defineComponent({
@@ -24,6 +25,13 @@ export default defineComponent({
         })
       }
       return styles
+    })
+
+    // 监听父组件传递的 props.visible（即modal的visible状态），当modal关闭时重置组件的visible状态
+    watch(() => props.visible, (newVal) => {
+      if (!newVal) {
+        visible.value = false // 当 modal 关闭时，重置 visible 状态
+      }
     })
 
     return () => (
