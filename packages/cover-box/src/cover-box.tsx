@@ -8,13 +8,14 @@ const NAME = 'www-cover-box'
 export default defineComponent({
   name: NAME,
   props: coverBoxProps,
-  emits: ['update:visible'],
+  emits: ['update:visible', 'changeVisible'],
   setup (props, { emit, slots }) {
     const visible = ref(false)
 
     const toggleVisibility = () => {
       if (!visible.value) visible.value = !visible.value
-      emit('update:visible', visible.value)
+      // emit('update:visible', visible.value)
+      emit('changeVisible', visible.value)
     }
 
     const coverStyles = computed(() => {
