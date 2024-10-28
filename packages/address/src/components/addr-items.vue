@@ -21,8 +21,9 @@
             :checked="props.defaultAddress == props.item.id"
             :value="props.item.id"
             @change="changeDefault"
-            >默认</a-checkbox
-          >
+            >
+            {{ props.defaultAddress == props.item.id ? '已默认' : '设为默认'}}
+          </a-checkbox>
           <div>
             <a-space>
               <a-popconfirm
@@ -52,8 +53,8 @@
 
               <a-popconfirm
                 placement="leftBottom"
-                ok-text="Yes"
-                cancel-text="No"
+                ok-text="确认"
+                cancel-text="取消"
                 @confirm="operateClick('choose')"
               >
                 <template #title>
