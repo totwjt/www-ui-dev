@@ -65,8 +65,11 @@
             allowClear
           >
             <template #addonBefore>
-              <loading-outlined v-if="searchLoading" />
-              <search-outlined v-else />
+              <!-- <loading-outlined v-if="searchLoading" />
+              <search-outlined v-else /> -->
+
+              <search-outlined />
+
             </template>
           </a-input>
         </div>
