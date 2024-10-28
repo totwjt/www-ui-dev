@@ -142,8 +142,7 @@ import { ref, defineProps, defineExpose, computed, watch, h, defineEmits } from 
 import { addressProps, AddrConfig, IAddressRes, IAddressParams } from './types'
 import {
   SearchOutlined,
-  PlusOutlined,
-  LoadingOutlined
+  PlusOutlined
 } from '@ant-design/icons-vue'
 import addressItem from './components/addr-items.vue'
 import addrForm from './components/addr-form.vue'
