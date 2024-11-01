@@ -98,7 +98,7 @@
     </a-drawer>
 
     <a-drawer
-      title="收货地址维护 - 表单"
+      title="收药地址维护"
       placement="bottom"
       v-model:visible="visibleForm"
       :get-container="'#address-content'"
@@ -173,7 +173,7 @@ const copyInviteLink = () => {
   emits('copyInviteLinkEmit')
 }
 
-const title = ref('收货地址维护')
+const title = ref('收药地址')
 const subTitle = ref<any>()
 subTitle.value = h('div', { style: { fontSize: '13px' } }, [
   '完善此订单收药地址，页面链接：',

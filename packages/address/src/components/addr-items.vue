@@ -28,8 +28,8 @@
             <a-space>
               <a-popconfirm
                 placement="leftBottom"
-                ok-text="Yes"
-                cancel-text="No"
+                ok-text="确认"
+                cancel-text="取消"
                 @confirm="operateClick('delete')"
               >
                 <template #title>

@@ -94,12 +94,7 @@
       </a-form-item>
 
       <a-form-item name="hasDefAddress" style="padding-left: 86px">
-        <a-checkbox
-          :checked="addressForm.hasDefAddress == 1"
-          @change="
-            (e) => (addressForm.hasDefAddress = e.target.checked ? 1 : 0)
-          "
-        >
+        <a-checkbox v-model:checked="isChecked">
           设为默认地址
         </a-checkbox>
       </a-form-item>
@@ -118,7 +113,7 @@
   </div>
 </template>
 <script setup lang="ts" name="addr-form">
-import { ref, defineExpose, defineEmits, watch, computed } from 'vue'
+import { ref, defineExpose, defineEmits, watch, computed, onMounted } from 'vue'
 import { IAddressItem } from '../types'
 // import { Form } from 'ant-design-vue'
 
@@ -153,26 +148,34 @@ const props = defineProps({
 const formRef = ref()
 const addressForm = ref(<IAddressItem>{})
 
-// const locationFucc = (val) => {
-//   const { provinceCode, provinceName, cityCode, cityName, countryCode, countryName } = val
-//   emits('locationEmit', Object.assign(val, {
-//     operateType: 'location',
-//     location: [provinceCode, cityCode, countryCode],
-//     includeLabelData: [provinceName, cityName, countryName]
-//   }))
-// }
+const isChecked = ref(false)
 
-watch(() => props.editItem, val => {
-  console.log('editItem2', val)
-  if (val && Object.keys(val).length) {
-    addressForm.value = val
+onMounted(() => {
+  addressForm.value = props.editItem
+  isChecked.value = props.editItem.id === props.defaultAddress
+  addressForm.value.hasDefAddress = props.editItem.id === props.defaultAddress ? 1 : 0
+})
 
-    // fixbug 实例ref可能不存在，导致报错
-    // if (val?.provinceCode) locationFucc(val)
-  } else {
-    addressForm.value = {}
-  }
-}, { immediate: true, deep: true })
+// watch(() => props.editItem, val => {
+//   console.log('editItem2', val)
+//   if (val && Object.keys(val).length) {
+//     addressForm.value = val
+
+//     // fixbug 修正 checked
+//     isChecked.value = props.editItem.id === props.defaultAddress
+//     hasDefAddress.value =
+
+//     // fixbug 实例ref可能不存在，导致报错
+//     // if (val?.provinceCode) locationFucc(val)
+//   } else {
+//     addressForm.value = {}
+//   }
+// }, { immediate: true, deep: true })
+
+// 监听复选框状态的变化，更新 hasDefAddress 的值
+watch(isChecked, (newVal) => {
+  addressForm.value.hasDefAddress = newVal ? 1 : 0
+})
 
 // const useForm = Form.useForm
 // const { resetFields, validate, validateInfos } = useForm(addressForm, rulesRef, {
@@ -281,6 +284,12 @@ const set = (item: IAddressItem) => {
 const setAddressForm = computed(() => {
   return props.setAddressForm
 })
+
+// const changeDefAddress = (e) => {
+//   console.log('changeDefAddress', e)
+//   addressForm.value.hasDefAddress = e.target.checked ? 1 : 0
+//   console.log('addressForm.value', addressForm.value)
+// }
 watch(() => setAddressForm.value, val => {
   console.log('watch setAddressForm.value', setAddressForm.value)
   set(val)
