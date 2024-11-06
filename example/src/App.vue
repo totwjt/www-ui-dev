@@ -296,7 +296,7 @@ const operateClickEmit = e => {
   }
   if (e.operateType === 'setDefault') {
     addressRef.value.setOptions({
-      defaultAddress: '1036330279909720064'
+      defaultAddress: e.id
     })
   }
 }

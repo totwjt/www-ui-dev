@@ -22,3 +22,5 @@ lib
 *.njsproj
 *.sln
 *.sw?
+
+script/sftp.json

@@ -80,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits, onMounted } from 'vue'
+import { ref, defineEmits, onMounted, watch } from 'vue'
 import {
   DeleteOutlined,
   EditOutlined,
@@ -105,6 +105,12 @@ onMounted(() => {
   checkedSta.value = props.item.hasDefAddress === 1
   defaultAddressId.value = props.defaultAddress
 })
+watch(() => props.item.hasDefAddress, (newVal) => {
+  checkedSta.value = newVal === 1
+})
+watch(() => props.defaultAddress, (newVal) => {
+  defaultAddressId.value = newVal
+})
 
 // const contentStyle = computed(() => {
 //   const bgColor = chooseId.value === '1234' ? '#419cff' : '#fafafa'
@@ -124,8 +130,8 @@ const operateClick = (type: string) => {
 }
 
 const changeDefault = (e) => {
-  console.log('changeDefault', e, checkedSta.value)
   const { value } = e.target
+  console.log('changeDefault', value, defaultAddressId.value, value === defaultAddressId.value)
   if (value === defaultAddressId.value) {
     return
   }
