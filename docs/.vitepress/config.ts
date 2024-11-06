@@ -11,6 +11,11 @@ const nav: DefaultTheme.NavItem[] = [
 const sidebar: DefaultTheme.Sidebar = {
   '/guide': [
     {
+      items: [
+        { text: 'BugList', link: '/guide/bugList' },
+      ]
+    },
+    {
       text: '指南',
       items: [
         { text: '组件库介绍', link: '/guide/' },
