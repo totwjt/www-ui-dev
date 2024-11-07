@@ -62,11 +62,18 @@
         <a-button @click="localName">联动插槽</a-button>
       </template>
     </www-address>
+
+    <h1>$eventBus</h1>
+    <a-space>emit:
+      <a-button type="primary" @click="$eventBus.emit('test', '123')">emit test:123</a-button>
+      <a-button type="primary" @click="$eventBus.emit('test', '456')">emit test:456</a-button>
+    </a-space>
+    <div>on: {{ eventBusText }} </div>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import { platform } from '@demo-ui-lib/demo-ui-lib'
+import { platform, $eventBus } from '@demo-ui-lib/demo-ui-lib'
 import CoverFeildLog from './coverFeild.vue'
 // import subtitle from './sub-title.vue'
 
@@ -447,6 +454,14 @@ const HandleVisible = () => {
     }
   }, 1000)
 }
+
+/* ----------------------------------------------------*\
+｜                       $eventBus
+\*---------------------------------------------------- */
+const eventBusText = ref()
+$eventBus.on('test', e => {
+  eventBusText.value = e
+})
 </script>
 
 <style scoped lang="scss">
