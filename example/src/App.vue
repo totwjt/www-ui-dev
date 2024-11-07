@@ -462,6 +462,10 @@ const eventBusText = ref()
 $eventBus.on('test', e => {
   eventBusText.value = e
 })
+
+$eventBus.on('Address_operateClick', e => {
+  console.log('Address_operateClick', e)
+})
 </script>
 
 <style scoped lang="scss">

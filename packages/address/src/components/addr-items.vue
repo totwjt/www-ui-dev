@@ -81,6 +81,7 @@
 
 <script setup lang="ts">
 import { ref, defineEmits, onMounted, watch } from 'vue'
+import { $eventBus } from '@demo-ui-lib/demo-ui-lib'
 import {
   DeleteOutlined,
   EditOutlined,
@@ -127,6 +128,7 @@ const emits = defineEmits(['operateClick'])
 
 const operateClick = (type: string) => {
   emits('operateClick', Object.assign({ operateType: type }, props.item))
+  $eventBus.emit('Address_operateClick', Object.assign({ operateType: type }, props.item))
 }
 
 const changeDefault = (e) => {
