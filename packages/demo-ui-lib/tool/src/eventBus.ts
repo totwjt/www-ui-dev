@@ -7,6 +7,7 @@ import mitt from 'mitt'
 //     bar?: number;
 //   };
 
+// @ts-ignore
 const $eventBus = mitt()
 
 $eventBus.on('*', (type, event) => {
