@@ -17,8 +17,8 @@
   },
   "dependencies": {
     "@demo-ui-lib/demo-ui-lib": "workspace:^",
-    "@vitepress-demo-preview/component": "^2.3.0",
-    "@vitepress-demo-preview/plugin": "^1.1.11",
+    "@vitepress-demo-preview/component": "^2.3.2",
+    "@vitepress-demo-preview/plugin": "^1.2.3",
     "ant-design-vue": "^3.2.20",
     "element-plus": "^2.3.6"
   }

@@ -19,6 +19,6 @@
     "baseUrl": ".",
     "noImplicitAny": false, // 是否在表达式和申明上有隐含的any类型时报错
   },
-  "include": ["../**/*.ts", "../**/*.d.ts", "../**/*.tsx", "../**/*.vue"],
+  "include": ["../**/*.ts", "../**/*.d.ts", "../**/*.tsx", "../**/*.vue", "tool/src/eventBus.js"],
   "exclude": ["../**/node_modules/"]
 }

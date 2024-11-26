@@ -14,7 +14,7 @@ hero:
     alt: www-ui
   actions:
     - theme: brand
-      text: 快速开始
+      text: 使用
       link: /guide/
     - theme: alt
       text: 组件

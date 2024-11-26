@@ -4,3 +4,7 @@
 ## 平台&设备信息
 
 <preview path="../demos/tool/tool-1.vue" title="基本使用" description=" "></preview>
+
+## mitt.js : $eventBus
+
+<preview path="../demos/tool/mitt-1.vue" title="基本使用" description=" "></preview>

@@ -18,8 +18,8 @@ const sidebar: DefaultTheme.Sidebar = {
     {
       text: '指南',
       items: [
+        { text: '使用', link: '/guide/quickstart' },
         { text: '组件库介绍', link: '/guide/' },
-        { text: '快速开始', link: '/guide/quickstart' },
       ]
     }
   ],
@@ -51,10 +51,6 @@ export default defineConfig({
     }
   },
   markdown: {
-    theme: {
-      light: 'vitesse-light',
-      dark: 'vitesse-dark'
-    },
     lineNumbers: true,
     config(md) {
       md.use(componentPreview)

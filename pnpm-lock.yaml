@@ -137,10 +137,10 @@ importers:
         specifier: workspace:^
         version: link:../packages/demo-ui-lib
       '@vitepress-demo-preview/component':
-        specifier: ^2.3.0
+        specifier: ^2.3.2
         version: 2.3.2(vitepress@1.0.0-alpha.26)
       '@vitepress-demo-preview/plugin':
-        specifier: ^1.1.11
+        specifier: ^1.2.3
         version: 1.2.3(vitepress@1.0.0-alpha.26)
       ant-design-vue:
         specifier: ^3.2.20

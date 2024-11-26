@@ -26,15 +26,17 @@
     <br />
     <br />
     <www-cover-box> 123 </www-cover-box>
+    <h1>字段隐藏</h1>
     <CoverFeildLog type="phone">13222222222</CoverFeildLog>
-    <p>就诊人详情</p>
+    <h1>就诊人详情</h1>
     <a-button @click="HandleVisible">visible</a-button>
     <www-consultant-information
       v-model:visible="visible"
       :info="info"
     ></www-consultant-information>
 
-    <div>平台：{{ platform() }}</div>
+    <h1>平台信息</h1>
+    <div>{{ platform() }}</div>
 
     <h1>地址管理</h1>
     <a-button @click="HandleAddress">地址管理</a-button>

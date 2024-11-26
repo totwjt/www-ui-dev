@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, ref, computed, defineExpose, onMounted } from 'vue'
 import { desensitizationProps } from './types'
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
 import { getType } from '../config'
@@ -62,6 +62,18 @@ export default defineComponent({
         emit('update:visible', visible.value)
       }
     }
+
+    const setVisible = (value) => {
+      visible.value = value
+    }
+
+    onMounted(() => {
+      setVisible(false)
+    })
+
+    defineExpose({
+      setVisible
+    })
 
     return () => (
       <div class={NAME}>

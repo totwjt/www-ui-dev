@@ -1,4 +1,4 @@
-# 快速开始
+# 使用
 
 xxxxxx
 
@@ -8,5 +8,4 @@ xxxxxx
 
 ```bash
 npm install @www/ui --registry=https://packages.aliyun.com/64a8f522a708906d745acea8/npm/hy-web/`
-
 ```
