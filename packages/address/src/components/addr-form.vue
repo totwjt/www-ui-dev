@@ -93,7 +93,7 @@
         /> -->
       </a-form-item>
 
-      <a-form-item name="hasDefAddress" style="padding-left: 86px">
+      <a-form-item name="hasDefAddress" style="padding-left: 86px" v-if="props.defaultSta">
         <a-checkbox v-model:checked="isChecked">
           设为默认地址
         </a-checkbox>
@@ -141,6 +141,11 @@ const props = defineProps({
   defaultAddress: {
     type: String,
     default: ''
+  },
+
+  defaultSta: {
+    type: Boolean,
+    default: false
   }
 
 })

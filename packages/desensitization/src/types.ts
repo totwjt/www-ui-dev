@@ -5,6 +5,10 @@ export const desensitizationProps = {
     type: String,
     default: null
   },
+  visible: {
+    type: Boolean,
+    default: false
+  },
   // 脱敏类型 idCard phone number
   type: {
     type: String,

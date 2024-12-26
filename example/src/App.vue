@@ -5,22 +5,12 @@
       测试站点主要用于开发过程中测试组件，即在开发过程中由业务驱动组件开发。
     </p>
     <p>{{ msg }}</p>
-    <www-desensitization
-      type="phone"
-      label="手机："
-      @update:visible="(visible) => console.log(visible)"
-      >13260462433</www-desensitization
-    >
+    <www-desensitization type="phone" label="手机："
+      @update:visible="(visible) => console.log(visible)">13260462433</www-desensitization>
     <www-foo></www-foo>
-    <www-cover-box
-      style="width: 100px; height: 100px"
-      bg-color="red"
-      width="100%"
-      height="100%"
-    >
+    <www-cover-box style="width: 100px; height: 100px" bg-color="red" width="100%" height="100%">
       <a-image
-        src="https://upload.jianshu.io/users/upload_avatars/26325037/1d3fda5b-f6dd-4c9c-a140-d794512f9e21.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
-      ></a-image>
+        src="https://upload.jianshu.io/users/upload_avatars/26325037/1d3fda5b-f6dd-4c9c-a140-d794512f9e21.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"></a-image>
     </www-cover-box>
     <br />
     <br />
@@ -30,27 +20,16 @@
     <CoverFeildLog type="phone">13222222222</CoverFeildLog>
     <h1>就诊人详情</h1>
     <a-button @click="HandleVisible">visible</a-button>
-    <www-consultant-information
-      v-model:visible="visible"
-      :info="info"
-    ></www-consultant-information>
+    <www-consultant-information v-model:visible="visible" :info="info"></www-consultant-information>
 
     <h1>平台信息</h1>
     <div>{{ platform() }}</div>
 
     <h1>地址管理</h1>
     <a-button @click="HandleAddress">地址管理</a-button>
-    <www-address
-      :setAddressForm="setAddressForm"
-      ref="addressRef"
-      @copyInviteLinkEmit="copyInviteLinkEmit"
-      @searchEmit="searchEmit"
-      @operateClickEmit="operateClickEmit"
-      @searchCompleteEmit="searchCompleteEmit"
-      @selectCompleteEmit="selectCompleteEmit"
-      @addressAreaEmit="addressAreaEmit"
-      @formSubmitEmit="formSubmitEmit"
-    >
+    <www-address :setAddressForm="setAddressForm" ref="addressRef" @copyInviteLinkEmit="copyInviteLinkEmit"
+      @searchEmit="searchEmit" @operateClickEmit="operateClickEmit" @searchCompleteEmit="searchCompleteEmit"
+      @selectCompleteEmit="selectCompleteEmit" @addressAreaEmit="addressAreaEmit" @formSubmitEmit="formSubmitEmit">
       <template #header1>
         <div class="flex row-between col-center pb20 m10">
           <div>
@@ -90,10 +69,10 @@ const copyInviteLinkEmit = () => {
   alert('copyInviteLinkEmit')
 }
 export type IAddressParams = Partial<{
-    wxUserId: string,
-    searchContent: string,
-    curPage: number,
-    pageSize: number
+  wxUserId: string,
+  searchContent: string,
+  curPage: number,
+  pageSize: number
 }>
 const addressParams = ref(<IAddressParams>{
   curPage: 1,
@@ -103,8 +82,9 @@ const addressParams = ref(<IAddressParams>{
 const HandleAddress = () => {
   setTimeout(() => {
     addressRef.value.show({
-    // subTitle: subtitle
+      // subTitle: subtitle
       showSubTitle: true,
+      defaultSta: false,
       addressParams: addressParams.value,
       addressRes: {
         records: [

@@ -1,18 +1,13 @@
 <template>
   <div class="www-address">
-    <a-drawer
-      :visible="visible"
-      :title="renderTitle"
-      width="50%"
-      @close="cancel"
-    >
+    <a-drawer :visible="visible" :title="renderTitle" width="50%" @close="cancel">
       <!-- <div class="h-100" > -->
       <!-- <template #closeIcon>
         <CloseCircleOutlined style="color: #0090ff; font-size: 18px" />
       </template> -->
 
       <template #extra>
-        <a-button class="ml10" size="large" type="primary" @click="showForm();editItem = {}">
+        <a-button class="ml10" size="large" type="primary" @click="showForm(); editItem = {}">
           <template #icon><plus-outlined /></template>
           新增地址
         </a-button>
@@ -21,13 +16,8 @@
       <template #footer v-if="!visibleForm">
         <div class="flex row-between col-center pl10 pr20">
 
-          <a-pagination
-            @change="changePagination"
-            v-model:current="addressPaginationCon.current"
-            :total="addressPaginationCon.total"
-            show-less-items
-            show-quick-jumper
-          />
+          <a-pagination @change="changePagination" v-model:current="addressPaginationCon.current"
+            :total="addressPaginationCon.total" show-less-items show-quick-jumper />
 
           <div class="flex row-end col-center">
             <!-- <a-typography-text class="pr20" type="danger"
@@ -37,18 +27,14 @@
               <template #icon>
                 <CloseOutlined />
               </template>
-              关闭
-            </a-button> -->
+关闭
+</a-button> -->
           </div>
         </div>
       </template>
 
-      <div
-        ref="addressContentRef"
-        id="address-content"
-        class="address-content h-100 w-100 relative flex-column row-left col-top"
-        style="overflow: hidden"
-      >
+      <div ref="addressContentRef" id="address-content"
+        class="address-content h-100 w-100 relative flex-column row-left col-top" style="overflow: hidden">
         <div class="w-100 mb10" style="background-color: #fafafa">
           <slot name="header1"></slot>
           <slot name="header2"></slot>
@@ -56,14 +42,8 @@
 
         <!-- <a-affix :target="() => addressContentRef"> -->
         <div class="w-100 flex row-between col-center mb10">
-          <a-input
-            size="large"
-            v-model:value="addressParams.searchContent"
-            placeholder="请输入收货人姓名或手机号搜索"
-            @change="onChange"
-            @pressEnter="onChange"
-            allowClear
-          >
+          <a-input size="large" v-model:value="addressParams.searchContent" placeholder="请输入收货人姓名或手机号搜索"
+            @change="onChange" @pressEnter="onChange" allowClear>
             <template #addonBefore>
               <!-- <loading-outlined v-if="searchLoading" />
               <search-outlined v-else /> -->
@@ -75,54 +55,24 @@
         </div>
         <!-- </a-affix> -->
 
-        <div
-          class="address-list w-100 flex-1 pr10"
-          id="addressList"
-          style="overflow-y: scroll"
-        >
+        <div class="address-list w-100 flex-1 pr10" id="addressList" style="overflow-y: scroll">
 
-          <template
-            v-for="(item, index) in addressList"
-            :key="index"
-          >
-            <address-item
-              class="mb10"
-              :item="item"
-              :defaultAddress="defaultAddress"
-              @operateClick="operateClick"
-            />
+          <template v-for="(item, index) in addressList" :key="index">
+            <address-item class="mb10" :defaultAddrNo="defaultAddrNo" :defaultSta="defaultSta" :item="item" :defaultAddress="defaultAddress" @operateClick="operateClick" />
           </template>
         </div>
         <!-- </a-spin> -->
       </div>
     </a-drawer>
 
-    <a-drawer
-      title="收药地址维护"
-      placement="bottom"
-      v-model:visible="visibleForm"
-      :get-container="'#address-content'"
-      :style="{ position: 'absolute' }"
-      height="80%"
-      width="90%"
-      :z-index="1050"
-      maskStyle="background: rgba(0, 0, 0, 0.2)"
-      :drawerStyle="{ border: '1px solid #eee' }"
-      :maskClosable="false"
-      destroyOnClose
-    >
-      <addr-form
-        ref="addrFormRef"
-        :setAddressForm="props.setAddressForm"
-        :completeOptions="completeOptions"
-        :defaultAddress="defaultAddress"
-        :editItem="editItem"
-        @onSearchCompleteEmit="onSearchCompleteEmit"
-        @onSelectCompleteEmit="onSelectCompleteEmit"
-        @addressAreaEmit="addressAreaEmit"
-        @onFormSubmitEmit="onFormSubmitEmit"
-        @locationEmit="operateClick"
-      >
+    <a-drawer title="收药地址维护" placement="bottom" v-model:visible="visibleForm" :get-container="'#address-content'"
+      :style="{ position: 'absolute' }" height="80%" width="90%" :z-index="1050"
+      maskStyle="background: rgba(0, 0, 0, 0.2)" :drawerStyle="{ border: '1px solid #eee' }" :maskClosable="false"
+      destroyOnClose>
+      <addr-form ref="addrFormRef" :defaultSta="defaultSta" :setAddressForm="props.setAddressForm" :completeOptions="completeOptions"
+        :defaultAddress="defaultAddress" :editItem="editItem" @onSearchCompleteEmit="onSearchCompleteEmit"
+        @onSelectCompleteEmit="onSelectCompleteEmit" @addressAreaEmit="addressAreaEmit"
+        @onFormSubmitEmit="onFormSubmitEmit" @locationEmit="operateClick">
 
         <template #locationName>
           <slot name="locationName"></slot>
@@ -206,7 +156,7 @@ const renderTitle = computed(() => {
     [
       h('span', { style: { marginRight: '8px' } }, title.value), // title 部分
       showSubTitle.value &&
-        h('span', { style: { marginLeft: '8px' } }, subTitle.value) // 根据 showSubTitle 动态渲染 subTitle
+      h('span', { style: { marginLeft: '8px' } }, subTitle.value) // 根据 showSubTitle 动态渲染 subTitle
     ]
   )
 })
@@ -282,7 +232,9 @@ const addressAreaEmit = e => {
 ｜                     设置默认
 \*---------------------------------------------------- */
 
+const defaultSta = ref(false)
 const defaultAddress = ref('')
+const defaultAddrNo = ref('')
 
 /* ----------------------------------------------------*\
 ｜                       导出方法
@@ -297,6 +249,8 @@ const show = (config: AddrConfig) => {
   if ('addressParams' in config) addressParams.value = config.addressParams || {}
   if ('addressRes' in config) addressRes.value = config.addressRes || {}
   if ('defaultAddress' in config) defaultAddress.value = config.defaultAddress || ''
+  if ('defaultSta' in config) defaultSta.value = config.defaultSta || false
+  if ('defaultAddrNo' in config) defaultAddrNo.value = config.defaultAddrNo || ''
 }
 
 const cancel = () => {
@@ -320,6 +274,7 @@ const completeOptions = ref([])
 const setOptions = options => {
   if ('completeOptions' in options) completeOptions.value = options.completeOptions
   if ('defaultAddress' in options) defaultAddress.value = options.defaultAddress
+  if ('defaultAddrNo' in options) defaultAddrNo.value = options.defaultAddrNo
 }
 
 // 地址联动

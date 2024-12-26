@@ -1,37 +1,26 @@
 <template>
   <div class="address-item">
-    <a-descriptions
-      bordered
-      :column="4"
-      size="small"
-      class="contentClass"
-    >
+    <a-descriptions bordered :column="4" size="small" class="contentClass">
       <a-descriptions-item :label="null" :span="2">{{
         props.item.receiverName
-      }}</a-descriptions-item>
+        }}</a-descriptions-item>
       <a-descriptions-item :span="2">{{
         props.item.receiverPhone
-      }}</a-descriptions-item>
+        }}</a-descriptions-item>
       <a-descriptions-item :span="4">{{
         props.item.address
-      }}</a-descriptions-item>
+        }}</a-descriptions-item>
       <a-descriptions-item :span="4">
         <div class="btns w-100 flex row-between col-center">
-          <a-checkbox
-            :checked="props.defaultAddress == props.item.id"
-            :value="props.item.id"
-            @change="changeDefault"
-            >
-            {{ props.defaultAddress == props.item.id ? '已默认' : '设为默认'}}
-          </a-checkbox>
+          <div>
+            <a-checkbox v-if="props.defaultSta" :checked="props.defaultAddress == props.item.id" :value="props.item.id"
+              @change="changeDefault">
+              {{ props.defaultAddress == props.item.id ? '已默认' : '设为默认' }}
+            </a-checkbox>
+          </div>
           <div>
             <a-space>
-              <a-popconfirm
-                placement="leftBottom"
-                ok-text="确认"
-                cancel-text="取消"
-                @confirm="operateClick('delete')"
-              >
+              <a-popconfirm placement="leftBottom" ok-text="确认" cancel-text="取消" @confirm="operateClick('delete')">
                 <template #title>
                   <p>确定此操作？</p>
                 </template>
@@ -42,35 +31,23 @@
                 </a-button>
               </a-popconfirm>
 
-              <a-button
-                size="default"
-                type="primary"
-                @click.stop="operateClick('update')"
-              >
+              <a-button size="default" type="primary" @click.stop="operateClick('update')">
                 <template #icon><edit-outlined /></template>
                 修改
               </a-button>
 
-              <a-popconfirm
-                placement="leftBottom"
-                ok-text="确认"
-                cancel-text="取消"
-                @confirm="operateClick('choose')"
-              >
+              <!-- <a-popconfirm placement="leftBottom" ok-text="确认" cancel-text="取消" @confirm="operateClick('choose')">
                 <template #title>
                   <h4>确认:</h4>
                   <p>已与患者确认<span style="color:#00B3EF">使用该收药地址</span>？</p>
-                </template>
+                </template> -->
 
-                <a-button
-                  size="default"
-                  type="text"
-                  style="background-color: orange; color: #fff"
-                >
-                  <template #icon><check-square-outlined /></template>
+              <a-button v-if="props.defaultAddrNo!=item.id" size="default" type="text" style="background-color: orange; color: #fff"
+                @click="operateClick('choose')">
+                <template #icon><check-square-outlined /></template>
                   使用
-                </a-button>
-              </a-popconfirm>
+              </a-button>
+              <!-- </a-popconfirm> -->
             </a-space>
           </div>
         </div>
@@ -91,9 +68,17 @@ import {
 const props = defineProps({
   item: {
     type: Object,
-    default: () => {}
+    default: () => { }
   },
   defaultAddress: {
+    type: String,
+    default: ''
+  },
+  defaultSta: {
+    type: Boolean,
+    default: false
+  },
+  defaultAddrNo: {
     type: String,
     default: ''
   }

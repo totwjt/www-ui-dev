@@ -68,6 +68,9 @@ export default defineComponent({
     }
 
     onMounted(() => {
+      console.log('onMountedonMounted')
+      console.log('props', props)
+      console.log('visible', visible.value)
       setVisible(false)
     })
 
