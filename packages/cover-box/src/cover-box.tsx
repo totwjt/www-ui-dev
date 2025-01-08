@@ -57,7 +57,13 @@ export default defineComponent({
         onClick={toggleVisibility}
         style={coverStyles.value}
       >
-        {visible.value && !isUnmounted.value && slots.default?.()}
+        {visible.value && !isUnmounted.value && (
+          <div
+            onClick={(event) => event.stopPropagation()} // 阻止插槽内容点击事件冒泡
+          >
+            {slots.default?.()}
+          </div>
+        )}
         {!visible.value && (
           <EyeInvisibleOutlined
             class={stylecss['cover-icon']}
