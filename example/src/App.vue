@@ -29,7 +29,9 @@
     <a-button @click="HandleAddress">地址管理</a-button>
     <www-address :setAddressForm="setAddressForm" ref="addressRef" @copyInviteLinkEmit="copyInviteLinkEmit"
       @searchEmit="searchEmit" @operateClickEmit="operateClickEmit" @searchCompleteEmit="searchCompleteEmit"
-      @selectCompleteEmit="selectCompleteEmit" @addressAreaEmit="addressAreaEmit" @formSubmitEmit="formSubmitEmit">
+      @selectCompleteEmit="selectCompleteEmit" @addressAreaEmit="addressAreaEmit" @formSubmitEmit="formSubmitEmit"
+      @closeEmit="closeEmit"
+      >
       <template #header1>
         <div class="flex row-between col-center pb20 m10">
           <div>
@@ -67,6 +69,9 @@ const addressRef = ref()
 const copyInviteLinkEmit = () => {
   console.log('copyInviteLinkEmit')
   alert('copyInviteLinkEmit')
+}
+const closeEmit = () => {
+  console.log('closeEmit')
 }
 export type IAddressParams = Partial<{
   wxUserId: string,

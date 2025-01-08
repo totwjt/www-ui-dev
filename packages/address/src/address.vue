@@ -106,7 +106,8 @@ const emits = defineEmits(
     'searchCompleteEmit',
     'selectCompleteEmit',
     'addressAreaEmit',
-    'formSubmitEmit'
+    'formSubmitEmit',
+    'closeEmit'
   ]
 )
 
@@ -255,6 +256,7 @@ const show = (config: AddrConfig) => {
 
 const cancel = () => {
   visible.value = false
+  emits('closeEmit')
 }
 
 // 新增 & 编辑
