@@ -2,7 +2,7 @@
   <!-- <div class="www-intl-tel intl-tel"> -->
     <!-- 区域选择 -->
     <span class="flag" :class="aearCode"></span>{{ getText }}
-    <div>{{ modelValue }}</div>
+
     <!-- <a-select
       v-if="mod === 'edit' || mode === 'create'"
       v-model="selectedPhoneType"

@@ -8,22 +8,36 @@
     <www-desensitization type="phone" label="手机："
       @update:visible="(visible) => console.log(visible)">13260462433</www-desensitization>
     <www-foo></www-foo>
+
+    <hr>
+
+    <h1>区域隐藏</h1>
     <www-cover-box style="width: 100px; height: 100px" bg-color="red" width="100%" height="100%">
       <a-image
         src="https://upload.jianshu.io/users/upload_avatars/26325037/1d3fda5b-f6dd-4c9c-a140-d794512f9e21.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"></a-image>
     </www-cover-box>
     <br />
     <br />
-    <br />
+
     <www-cover-box> 123 </www-cover-box>
+
+    <hr>
+
     <h1>字段隐藏</h1>
     <CoverFeildLog type="phone">13222222222</CoverFeildLog>
+
+    <hr>
+
     <h1>就诊人详情</h1>
     <a-button @click="HandleVisible">visible</a-button>
     <www-consultant-information v-model:visible="visible" :info="info"></www-consultant-information>
 
+    <hr>
+
     <h1>平台信息</h1>
     <div>{{ platform() }}</div>
+
+    <hr>
 
     <h1>地址管理</h1>
     <a-button @click="HandleAddress">地址管理</a-button>
@@ -45,6 +59,8 @@
       </template>
     </www-address>
 
+    <hr>
+
     <h1>$eventBus</h1>
     <a-space>emit:
       <a-button type="primary" @click="$eventBus.emit('test', '123')">emit test:123</a-button>
@@ -52,8 +68,17 @@
     </a-space>
     <div>on: {{ eventBusText }} </div>
 
-    <h1>手机号国际号</h1>
-    <www-intl-tel mod="view" v-model="intlTelPhone" type="1" />
+    <hr>
+
+    <h1>手机号国际化</h1>
+    {{ intlTelPhone }}
+    <a-input v-model:value="intlTelPhone.patientPhoneType" placeholder="patientPhoneType"></a-input>
+    <a-input v-model:value="intlTelPhone.patientPhone" placeholder="patientPhone"></a-input>
+    <a-button @click="()=>intlTelPhone.patientPhoneType=undefined">删除patientPhoneType节点</a-button>
+    <div>1. 绑定一个obj 根据 obj.patientPhoneType 匹配， 忽略手机号</div>
+    <div>2. 绑定一个obj， obj.patientPhoneType不存在节点 自行根据手机号patientPhone匹配，匹配失败不显示</div>
+    <www-intl-tel mod="view" v-model="intlTelPhone" />
+
   </div>
 </template>
 <script setup lang="ts">
@@ -460,7 +485,6 @@ $eventBus.on('Address_operateClick', e => {
 ｜                       手机号国际话
 \*---------------------------------------------------- */
 
-// const intlTelPhone = ref('13260462736')
 const intlTelPhone = ref({
   patientId: '965318477621493760',
   wxUserId: '965318477512441856',

@@ -6,24 +6,31 @@ export function useIntlTel (modelValue) {
   const aearCode = ref<string>('')
 
   // 根据手机号判断默认区域
-  const getDefaultPhoneType = (phone: string): number => {
+  const getDefaultPhoneType = (phone: string): number | undefined => {
     if (/^1[3-9]\d{9}$/.test(phone)) return 0 // 默认中国大陆
     if (/^852\d{8}$/.test(phone)) return 1 // 中国香港
     if (/^853\d{8}$/.test(phone)) return 2 // 中国澳门
     if (/^886\d{9}$/.test(phone)) return 3 // 中国台湾
-    return 0 // 默认中国大陆
   }
 
-  const _getPhoneDictValueByType = (type: string) => {
-    console.log('type', type)
-    console.log('modelValue', modelValue, modelValue.patientPhoneType)
-    const entry = phoneDict.find(item => item.value === String(type))
-    console.log('entry', entry)
-    return entry
+  const _getPhoneDictValueByType = (modelvalue) => {
+    if (modelValue?.patientPhoneType) {
+      const entry = phoneDict.find(item => item.value === String(modelValue?.patientPhoneType))
+      console.log('entry1', entry)
+
+      return entry
+    } else if (modelValue?.patientPhone) {
+      const type = getDefaultPhoneType(modelValue?.patientPhone)
+
+      const entry = phoneDict.find(item => item.value === String(type))
+      console.log('entry', entry)
+
+      return entry
+    }
   }
 
   const getText = computed(() => {
-    const item = _getPhoneDictValueByType(modelValue?.patientPhoneType)
+    const item = _getPhoneDictValueByType(modelValue)
 
     if (!item) return ''
 
