@@ -30,8 +30,7 @@
     <www-address :setAddressForm="setAddressForm" ref="addressRef" @copyInviteLinkEmit="copyInviteLinkEmit"
       @searchEmit="searchEmit" @operateClickEmit="operateClickEmit" @searchCompleteEmit="searchCompleteEmit"
       @selectCompleteEmit="selectCompleteEmit" @addressAreaEmit="addressAreaEmit" @formSubmitEmit="formSubmitEmit"
-      @closeEmit="closeEmit"
-      >
+      @closeEmit="closeEmit">
       <template #header1>
         <div class="flex row-between col-center pb20 m10">
           <div>
@@ -52,6 +51,9 @@
       <a-button type="primary" @click="$eventBus.emit('test', '456')">emit test:456</a-button>
     </a-space>
     <div>on: {{ eventBusText }} </div>
+
+    <h1>手机号国际号</h1>
+    <www-intl-tel mod="view" v-model="intlTelPhone" type="1" />
   </div>
 </template>
 <script setup lang="ts">
@@ -452,6 +454,40 @@ $eventBus.on('test', e => {
 
 $eventBus.on('Address_operateClick', e => {
   console.log('Address_operateClick', e)
+})
+
+/* ----------------------------------------------------*\
+｜                       手机号国际话
+\*---------------------------------------------------- */
+
+// const intlTelPhone = ref('13260462736')
+const intlTelPhone = ref({
+  patientId: '965318477621493760',
+  wxUserId: '965318477512441856',
+  patientName: '吕翔',
+  patientPhone: '15101530773',
+  patientPhoneType: 2,
+  patientCardType: '0',
+  patientSex: 1,
+  patientIdCard: '142322199701164015',
+  patientAge: '28岁',
+  patientMonth: 0,
+  height: 0,
+  weight: 0,
+  province: 0,
+  city: 0,
+  country: 0,
+  provinceCh: '',
+  cityCh: '',
+  countryCh: '',
+  medicalHistory: '',
+  allergicHistory: '',
+  oneself: 1,
+  haveBusiness: 1,
+  complaint: '了来咯哦哦弄靠靠靠沫',
+  job: '',
+  disease: '',
+  symptom: ''
 })
 </script>
 

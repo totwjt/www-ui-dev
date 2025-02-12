@@ -228,6 +228,9 @@ importers:
       '@demo-ui-lib/foo':
         specifier: workspace:^
         version: link:../foo
+      '@demo-ui-lib/intl-tel':
+        specifier: workspace:^1.0.0
+        version: link:../intl-tel
       '@demo-ui-lib/tool':
         specifier: workspace:^1.0.0
         version: link:../tool

@@ -5,6 +5,7 @@ import Desensitization from '@demo-ui-lib/desensitization'
 import CoverBox from '@demo-ui-lib/cover-box'
 import ConsultantInformation from '@demo-ui-lib/consultant-information'
 import Address from '@demo-ui-lib/address'
+import IntlTel from '@demo-ui-lib/intl-tel'
 // import component end
 import '../scss/index.scss'
 
@@ -14,7 +15,8 @@ const components = [
   Desensitization,
   CoverBox,
   ConsultantInformation,
-  Address
+  Address,
+  IntlTel
 ] // components
 
 // 全局动态添加组件

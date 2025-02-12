@@ -1,6 +1,6 @@
 {
   "name": "@www/ui",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Vue3组件库",
   "author": "Awwwait",
   "private": false,
@@ -100,5 +100,8 @@
     "*.{js,ts,jsx,tsx,vue}": [
       "pnpm run lint"
     ]
+  },
+  "volta": {
+    "node": "16.19.0"
   }
 }
