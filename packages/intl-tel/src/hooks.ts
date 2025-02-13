@@ -1,9 +1,10 @@
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, unref } from 'vue'
 import { phoneDict } from './dict'
 
-export function useIntlTel (modelValue) {
+export function useIntlTel (props, phoneNumber = undefined) {
+  console.log('props1', props, unref(props))
   const exampleState = ref<string>('')
-  const aearCode = ref<string>('')
+  const areaCode = ref<string>('')
 
   // 根据手机号判断默认区域
   const getDefaultPhoneType = (phone: string): number | undefined => {
@@ -13,28 +14,36 @@ export function useIntlTel (modelValue) {
     if (/^886\d{9}$/.test(phone)) return 3 // 中国台湾
   }
 
-  const _getPhoneDictValueByType = (modelvalue) => {
-    if (modelValue?.patientPhoneType) {
+  const _getPhoneDictValueByType = (modelValue, phone) => {
+    console.log('modelValue', modelValue, phone)
+
+    if (phone) {
+      const type = getDefaultPhoneType(phone)
+      console.log('type', type)
+
+      const entry = phoneDict.find(item => item.value === String(type))
+
+      return entry
+    } else if (modelValue?.patientPhoneType) {
       const entry = phoneDict.find(item => item.value === String(modelValue?.patientPhoneType))
-      console.log('entry1', entry)
 
       return entry
     } else if (modelValue?.patientPhone) {
       const type = getDefaultPhoneType(modelValue?.patientPhone)
 
       const entry = phoneDict.find(item => item.value === String(type))
-      console.log('entry', entry)
 
       return entry
     }
   }
 
   const getText = computed(() => {
-    const item = _getPhoneDictValueByType(modelValue)
+    const item = _getPhoneDictValueByType(props.modelValue, props.phone)
+    console.log('item', props.phone, item)
 
     if (!item) return ''
 
-    aearCode.value = item?.class || ''
+    areaCode.value = item?.class || ''
 
     return `${item?.name} (${item?.hd})`
   })
@@ -56,7 +65,7 @@ export function useIntlTel (modelValue) {
   return {
     getDefaultPhoneType,
     getText,
-    aearCode,
+    areaCode,
     updateState
   }
 }

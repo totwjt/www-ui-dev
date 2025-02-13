@@ -72,12 +72,17 @@
 
     <h1>手机号国际化</h1>
     {{ intlTelPhone }}
+    {{ intlTelPhoneString }}
     <a-input v-model:value="intlTelPhone.patientPhoneType" placeholder="patientPhoneType"></a-input>
     <a-input v-model:value="intlTelPhone.patientPhone" placeholder="patientPhone"></a-input>
-    <a-button @click="()=>intlTelPhone.patientPhoneType=undefined">删除patientPhoneType节点</a-button>
+    <a-button @click="() => intlTelPhone.patientPhoneType = undefined">删除patientPhoneType节点</a-button>
+
     <div>1. 绑定一个obj 根据 obj.patientPhoneType 匹配， 忽略手机号</div>
     <div>2. 绑定一个obj， obj.patientPhoneType不存在节点 自行根据手机号patientPhone匹配，匹配失败不显示</div>
-    <www-intl-tel mod="view" v-model="intlTelPhone" />
+    <!-- <www-intl-tel mod="view" v-model="intlTelPhone" /> -->
+    <div>3. 直接绑定一个props.phone:string, 优先级最高 </div>
+    <a-input v-model:value="intlTelPhoneString" />
+    <www-intl-tel mod="view" :phone="intlTelPhoneString" :setStyle="{fontSize: '20px'}" />
 
   </div>
 </template>
@@ -513,6 +518,8 @@ const intlTelPhone = ref({
   disease: '',
   symptom: ''
 })
+
+const intlTelPhoneString = ref('13260462736')
 </script>
 
 <style scoped lang="scss">
