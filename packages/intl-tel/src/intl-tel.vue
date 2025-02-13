@@ -3,7 +3,7 @@
   <!-- 区域选择 -->
   <template v-if="getText">
     <span v-if="props.showIcon" class="flag" :class="areaCode"></span>
-    <span class="f13" :style="setStyle">{{ getText }}</span>
+    <span :style="setStyle">{{ getText }}</span>
   </template>
 
   <!-- <a-select

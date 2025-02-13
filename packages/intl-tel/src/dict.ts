@@ -10,7 +10,8 @@ export const phoneDict = [
     alias: '',
     parentId: null,
     clientShowState: 0,
-    hd: '+86',
+    // hd: '+86',
+    hd: '',
     class: 'cn'
   },
   {
