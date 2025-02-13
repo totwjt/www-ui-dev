@@ -15,6 +15,10 @@ export const intlTelProps = {
     type: String,
     default: '0'
   },
+  showIcon: {
+    type: Boolean,
+    default: false
+  },
   setStyle: Object
 } as const
 

@@ -14,10 +14,14 @@ export function useIntlTel (props, phoneNumber = undefined) {
     if (/^886\d{9}$/.test(phone)) return 3 // 中国台湾
   }
 
-  const _getPhoneDictValueByType = (modelValue, phone) => {
+  const _getPhoneDictValueByType = ({ modelValue, phone, type = undefined }) => {
     console.log('modelValue', modelValue, phone)
 
-    if (phone) {
+    if (type) {
+      const entry = phoneDict.find(item => item.value === String(type))
+
+      return entry
+    } else if (phone) {
       const type = getDefaultPhoneType(phone)
       console.log('type', type)
 
@@ -38,14 +42,14 @@ export function useIntlTel (props, phoneNumber = undefined) {
   }
 
   const getText = computed(() => {
-    const item = _getPhoneDictValueByType(props.modelValue, props.phone)
-    console.log('item', props.phone, item)
+    const item = _getPhoneDictValueByType(props)
 
     if (!item) return ''
 
     areaCode.value = item?.class || ''
 
-    return `${item?.name} (${item?.hd})`
+    // return `${item?.name} (${item?.hd})`
+    return `${item?.hd} `
   })
 
   onMounted(() => {

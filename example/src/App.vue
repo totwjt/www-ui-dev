@@ -84,6 +84,9 @@
     <a-input v-model:value="intlTelPhoneString" />
     <www-intl-tel mod="view" :phone="intlTelPhoneString" :setStyle="{fontSize: '20px'}" />
 
+    <div>4. 直接绑定一个props.type, 优先级最高 </div>
+    <www-intl-tel mod="view" type="1" :setStyle="{fontSize: '20px'}" />123
+
   </div>
 </template>
 <script setup lang="ts">

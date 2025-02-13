@@ -2,8 +2,8 @@
   <!-- <div class="www-intl-tel intl-tel"> -->
   <!-- 区域选择 -->
   <template v-if="getText">
-    <span class="flag" :class="areaCode"></span>
-    <span :style="setStyle">{{ getText }}</span>
+    <span v-if="props.showIcon" class="flag" :class="areaCode"></span>
+    <span class="f13" :style="setStyle">{{ getText }}</span>
   </template>
 
   <!-- <a-select
