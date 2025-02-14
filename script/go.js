@@ -47,10 +47,13 @@ try {
   // 提交
   execSync(`git commit -m "${commitMessage}"`, { stdio: 'inherit' })
 
-  // 推送到所有远程仓库
-  execSync('git push --all', { stdio: 'inherit' })
+  // 推送到远程仓库 'origin' (阿里云)
+  execSync('git push origin main', { stdio: 'inherit' })
 
-  console.log('Git commit and push to all remotes successful!')
+  // 推送到远程仓库 'www-ui-dev' (GitHub)
+  execSync('git push www-ui-dev main', { stdio: 'inherit' })
+
+  console.log('Git commit and push to both remotes successful!')
 } catch (error) {
   console.error('Error during Git operations:', error.message)
   process.exit(1)
