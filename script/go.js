@@ -41,16 +41,16 @@ if (!hasChanges()) {
 try {
   console.log('Executing Git commit and push...')
 
-  // 添加所有更改，包括版本号更新和构建文件
+  // 添加所有更改
   execSync('git add .', { stdio: 'inherit' })
 
   // 提交
   execSync(`git commit -m "${commitMessage}"`, { stdio: 'inherit' })
 
-  // 推送到远程仓库
+  // 推送到所有远程仓库
   execSync('git push --all', { stdio: 'inherit' })
 
-  console.log('Git commit and push successful!')
+  console.log('Git commit and push to all remotes successful!')
 } catch (error) {
   console.error('Error during Git operations:', error.message)
   process.exit(1)
