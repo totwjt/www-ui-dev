@@ -48,7 +48,7 @@ try {
   execSync(`git commit -m "${commitMessage}"`, { stdio: 'inherit' })
 
   // 推送到远程仓库
-  execSync('git push', { stdio: 'inherit' })
+  execSync('git push --all', { stdio: 'inherit' })
 
   console.log('Git commit and push successful!')
 } catch (error) {
