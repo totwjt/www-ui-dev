@@ -82,16 +82,20 @@
     <!-- <www-intl-tel mod="view" v-model="intlTelPhone" /> -->
     <div>3. 直接绑定一个props.phone:string, 优先级最高 </div>
     <a-input v-model:value="intlTelPhoneString" />
-    <www-intl-tel mod="view" :phone="intlTelPhoneString" :setStyle="{fontSize: '20px'}" />
+    <www-intl-tel mod="view" :phone="intlTelPhoneString" :setStyle="{ fontSize: '20px' }" />
 
     <div>4. 直接绑定一个props.type, 优先级最高 </div>
-    <www-intl-tel mod="view" type="1" :setStyle="{fontSize: '20px'}" />123
+    <www-intl-tel mod="view" type="1" :setStyle="{ fontSize: '20px' }" />123
 
+    <hr>
+
+    <h1>港澳台正则</h1>
+    {{ phonePattern('0') }}
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import { platform, $eventBus } from '@demo-ui-lib/demo-ui-lib'
+import { platform, $eventBus, phonePattern } from '@demo-ui-lib/demo-ui-lib'
 import CoverFeildLog from './coverFeild.vue'
 // import subtitle from './sub-title.vue'
 
