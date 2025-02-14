@@ -62,7 +62,7 @@ try {
 // 更新 package 版本号（假设增加 patch 版本）
 try {
   console.log('Updating package version...')
-  execSync('npm version patch', { stdio: 'inherit' })
+  execSync('pnpm version patch', { stdio: 'inherit' })
   console.log('Version updated!')
 } catch (error) {
   console.error('Error updating version:', error.message)
@@ -81,10 +81,10 @@ try {
 
 // 执行发布操作
 try {
-  console.log('Executing npm publish...')
-  execSync('npm run pub:aliyun', { stdio: 'inherit' })
+  console.log('Executing pnpm publish...')
+  execSync('pnpm run pub:aliyun', { stdio: 'inherit' })
   console.log('Publish to Aliyun successful!')
 } catch (error) {
-  console.error('Error during npm publish:', error.message)
+  console.error('Error during pnpm publish:', error.message)
   process.exit(1)
 }
