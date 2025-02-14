@@ -1,6 +1,6 @@
 {
   "name": "@www/ui",
-  "version": "1.2.15",
+  "version": "1.2.16",
   "description": "Vue3组件库",
   "author": "Awwwait",
   "private": false,
@@ -41,13 +41,14 @@
     "pub:local": "pnpm publish --registry http://localhost:4873/",
     "pub:aliyun": "pnpm publish --registry https://packages.aliyun.com/64a8f522a708906d745acea8/npm/hy-web/",
     "pub:npm": "pnpm publish --access=public",
+    "go": "node script/go.js",
     "lint": "eslint \"{cli,packages,docs,example}/**/*.{js,ts,vue,jsx,tsx}\" --fix"
   },
   "keywords": [
     "wjt",
     "ui",
     "vue3",
-  "vite",
+    "vite",
     "component",
     "library"
   ],
