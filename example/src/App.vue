@@ -6,7 +6,7 @@
     </p>
     <p>{{ msg }}</p>
     <www-desensitization type="phone" label="手机："
-      @update:visible="(visible) => console.log(visible)">13260462433</www-desensitization>
+      @update:visible="(visible: boolean) => console.log(visible)">13260462433</www-desensitization>
     <www-foo></www-foo>
 
     <hr>
@@ -85,18 +85,31 @@
     <www-intl-tel mod="view" :phone="intlTelPhoneString" :setStyle="{ fontSize: '20px' }" />
 
     <div>4. 直接绑定一个props.type, 优先级最高 </div>
-    <www-intl-tel mod="view" type="1" :setStyle="{ fontSize: '20px' }" />123
+    <www-intl-tel mod="view" type="3" :setStyle="{ fontSize: '20px' }" />
 
     <hr>
 
-    <h1>港澳台正则</h1>
-    {{ phonePattern('0') }}
+    <h1>大陆港澳台</h1>
+    <h4>1. 港澳台正则</h4>
+    <div>{{ phonePattern('0') }}</div>
+    <div>{{ phonePattern('1') }}</div>
+    <div>{{ phonePattern('2') }}</div>
+    <div>{{ phonePattern('3') }}</div>
+
+    <h4>2. 港澳台手机枚举:</h4>
+    <div><json-viewer :value="phoneDict"></json-viewer></div>
+
+    <h3>3. 根据地区类型获取手机区号前缀 showMobilePhoneAreaCodeByType('0')</h3>
+    <div>{{ showMobilePhoneAreaCodeByType('0') }}</div>
+
+    <hr>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import { platform, $eventBus, phonePattern } from '@demo-ui-lib/demo-ui-lib'
+import { platform, $eventBus, phonePattern, phoneDict, showMobilePhoneAreaCodeByType } from '@demo-ui-lib/demo-ui-lib'
 import CoverFeildLog from './coverFeild.vue'
+import JsonViewer from 'vue-json-viewer'
 // import subtitle from './sub-title.vue'
 
 /* ----------------------------------------------------*\
@@ -502,7 +515,7 @@ const intlTelPhone = ref({
   wxUserId: '965318477512441856',
   patientName: '吕翔',
   patientPhone: '15101530773',
-  patientPhoneType: 2,
+  patientPhoneType: 2 as 0 | 1 | 2 | 3 | 4 | undefined,
   patientCardType: '0',
   patientSex: 1,
   patientIdCard: '142322199701164015',

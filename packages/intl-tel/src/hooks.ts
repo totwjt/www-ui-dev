@@ -1,5 +1,5 @@
 import { ref, onMounted, onUnmounted, computed, unref } from 'vue'
-import { phoneDict } from './dict'
+import { phoneDict } from '@demo-ui-lib/demo-ui-lib'
 
 export function useIntlTel (props, phoneNumber = undefined) {
   console.log('props1', props, unref(props))

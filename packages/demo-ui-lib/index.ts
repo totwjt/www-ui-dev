@@ -26,7 +26,7 @@ const install = (app: App): void => {
   })
 }
 
-export { platform, $eventBus, phonePattern } from './tool/index'
+export * from './tool/index'
 
 export default {
   install

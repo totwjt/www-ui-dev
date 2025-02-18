@@ -2,7 +2,7 @@
 ｜                       正则规则
 \*---------------------------------------------------- */
 
-// 动态手机号码正则表达式
+// 动态手机号码正则表达式 无区号
 export const phonePattern = (phoneType: string) => {
   switch (phoneType) {
     case '0': // 中国大陆
