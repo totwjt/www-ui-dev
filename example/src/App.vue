@@ -97,7 +97,9 @@
     <div>{{ phonePattern('3') }}</div>
 
     <h4>2. 港澳台手机枚举:</h4>
-    <div><json-viewer :value="phoneDict"></json-viewer></div>
+    <div>
+      <vue-json-pretty :data="phoneDict" />
+    </div>
 
     <h3>3. 根据地区类型获取手机区号前缀 showMobilePhoneAreaCodeByType('0')</h3>
     <div>{{ showMobilePhoneAreaCodeByType('0') }}</div>
@@ -109,8 +111,10 @@
 import { ref } from 'vue'
 import { platform, $eventBus, phonePattern, phoneDict, showMobilePhoneAreaCodeByType } from '@demo-ui-lib/demo-ui-lib'
 import CoverFeildLog from './coverFeild.vue'
-import JsonViewer from 'vue-json-viewer'
-// import subtitle from './sub-title.vue'
+
+// @ts-ignore
+import VueJsonPretty from 'vue-json-pretty'
+import 'vue-json-pretty/lib/styles.css'
 
 /* ----------------------------------------------------*\
 ｜                       地址管理
