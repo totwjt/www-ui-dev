@@ -51,7 +51,7 @@ try {
   execSync('git push origin main', { stdio: 'inherit' })
 
   // 推送到远程仓库 'www-ui-dev' (GitHub)
-  execSync('git push www-ui-dev main', { stdio: 'inherit' })
+  // execSync('git push www-ui-dev main', { stdio: 'inherit' })
 
   console.log('Git commit and push to both remotes successful!')
 } catch (error) {
