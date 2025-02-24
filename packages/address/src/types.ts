@@ -38,6 +38,12 @@ export type IAddressItem = Partial<{
   hasDefAddress: number; // Assuming 0 means false, 1 means true for default address
 }>;
 
+export type PatientInfo=Partial<{
+  patientName?:string;
+  patientAge?:string | number;
+  patientSex?:number
+}>
+
 export type IAddressRes = {
   records?: IAddressItem[];
   total?: number;
@@ -60,5 +66,5 @@ export type AddrConfig = {
   defaultAddress?: string;
   defaultAddrNo?: string;
   defaultSta?: boolean;
-  patientName?:string;
+  patientName?:PatientInfo;
 };
