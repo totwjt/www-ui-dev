@@ -348,7 +348,9 @@ function __debounce(fn: (...args: any[]) => void, delay: number) {
     bottom: -10px;
     background: #fff;
     font-size: 14px;
-    color: red;
+    span{
+      color: red;
+    }
 }
 
 </style>
