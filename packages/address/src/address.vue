@@ -118,6 +118,7 @@ const visible = ref(false)
 const visibleForm = ref(false)
 const showSubTitle = ref(false) // 控制是否显示 subTitle
 const addressRes = ref(<IAddressRes>{})
+let patientName=ref('')
 
 const copyInviteLink = () => {
   console.log('复制邀请链接')
@@ -150,14 +151,15 @@ const renderTitle = computed(() => {
     {
       style: {
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start'
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        flexDirection:'column'
       }
     },
     [
-      h('span', { style: { marginRight: '8px' } }, title.value), // title 部分
+      h('span', { style: { marginRight:patientName.value? '0px':'8px' } }, patientName.value? `就诊人 ${patientName.value} 的${title.value}`:title.value), // title 部分
       showSubTitle.value &&
-      h('span', { style: { marginLeft: '8px' } }, subTitle.value) // 根据 showSubTitle 动态渲染 subTitle
+      h('span', { style: { marginLeft:patientName.value? '0px':'8px' } }, subTitle.value) // 根据 showSubTitle 动态渲染 subTitle
     ]
   )
 })
@@ -252,10 +254,12 @@ const show = (config: AddrConfig) => {
   if ('defaultAddress' in config) defaultAddress.value = config.defaultAddress || ''
   if ('defaultSta' in config) defaultSta.value = config.defaultSta || false
   if ('defaultAddrNo' in config) defaultAddrNo.value = config.defaultAddrNo || ''
+  if ('patientName' in config) patientName.value = config.patientName || ''
 }
 
 const cancel = () => {
-  visible.value = false
+  visible.value = false;
+  patientName.value=''
   emits('closeEmit')
 }
 

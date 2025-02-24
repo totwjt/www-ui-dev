@@ -59,5 +59,6 @@ export type AddrConfig = {
   addressRes?: IAddressRes;
   defaultAddress?: string;
   defaultAddrNo?: string;
-  defaultSta?: boolean
+  defaultSta?: boolean;
+  patientName?:string;
 };
