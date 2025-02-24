@@ -342,4 +342,13 @@ function __debounce(fn: (...args: any[]) => void, delay: number) {
     right: 0;
   }
 }
+.title-bottom-tip{
+  position: absolute;
+    left: 125px;
+    bottom: -10px;
+    background: #fff;
+    font-size: 14px;
+    color: red;
+}
+
 </style>
