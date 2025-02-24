@@ -58,7 +58,8 @@
         <div class="address-list w-100 flex-1 pr10" id="addressList" style="overflow-y: scroll">
 
           <template v-for="(item, index) in addressList" :key="index">
-            <address-item class="mb10" :defaultAddrNo="defaultAddrNo" :defaultSta="defaultSta" :item="item" :defaultAddress="defaultAddress" @operateClick="operateClick" />
+            <address-item class="mb10" :defaultAddrNo="defaultAddrNo" :defaultSta="defaultSta" :item="item"
+              :defaultAddress="defaultAddress" @operateClick="operateClick" />
           </template>
         </div>
         <!-- </a-spin> -->
@@ -69,14 +70,15 @@
       :style="{ position: 'absolute' }" height="80%" width="90%" :z-index="1050"
       maskStyle="background: rgba(0, 0, 0, 0.2)" :drawerStyle="{ border: '1px solid #eee' }" :maskClosable="false"
       destroyOnClose>
-        <template #title>
-            <span class="title">收药地址维护</span>
-            <div v-if="patientInfo?.patientName" class="title-bottom-tip">当前订单就诊人：<span>{{ patientInfo.patientName }} {{ {1:'男',2:'女'}[Number(patientInfo.patientSex)] }} {{ parseFloat(patientInfo.patientAge) || 0 }}岁</span></div>
-        </template>
-      <addr-form ref="addrFormRef" :defaultSta="defaultSta" :setAddressForm="props.setAddressForm" :completeOptions="completeOptions"
-        :defaultAddress="defaultAddress" :editItem="editItem" @onSearchCompleteEmit="onSearchCompleteEmit"
-        @onSelectCompleteEmit="onSelectCompleteEmit" @addressAreaEmit="addressAreaEmit"
-        @onFormSubmitEmit="onFormSubmitEmit" @locationEmit="operateClick">
+      <template #title>
+        <span class="title">收药地址维护</span>
+        <div v-if="patientInfo?.patientName" class="title-bottom-tip">当前订单就诊人：<span>{{ patientInfo.patientName }} {{
+          { 1: '男', 2: '女' }[Number(patientInfo.patientSex)] }} {{ parseFloat(patientInfo.patientAge) || 0 }}岁</span></div>
+      </template>
+      <addr-form ref="addrFormRef" :defaultSta="defaultSta" :setAddressForm="props.setAddressForm"
+        :completeOptions="completeOptions" :defaultAddress="defaultAddress" :editItem="editItem"
+        @onSearchCompleteEmit="onSearchCompleteEmit" @onSelectCompleteEmit="onSelectCompleteEmit"
+        @addressAreaEmit="addressAreaEmit" @onFormSubmitEmit="onFormSubmitEmit" @locationEmit="operateClick">
 
         <template #locationName>
           <slot name="locationName"></slot>
@@ -122,10 +124,10 @@ const visible = ref(false)
 const visibleForm = ref(false)
 const showSubTitle = ref(false) // 控制是否显示 subTitle
 const addressRes = ref(<IAddressRes>{})
-let patientInfo=ref({
-  patientName:'',
-  patientSex:'',
-  patientAge:'',
+let patientInfo = ref({
+  patientName: '',
+  patientSex: '',
+  patientAge: '',
 }) //就诊人信息
 
 const copyInviteLink = () => {
@@ -161,13 +163,13 @@ const renderTitle = computed(() => {
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        flexDirection:'column'
+        flexDirection: 'column'
       }
     },
     [
-      h('span', { style: { marginRight:patientInfo.value?.patientName? '0px':'8px' } }, patientInfo.value?.patientName? `就诊人 ${patientInfo.value?.patientName} 的${title.value}`:title.value), // title 部分
+      h('span', { style: { marginRight: patientInfo.value?.patientName ? '0px' : '8px' } }, patientInfo.value?.patientName ? `就诊人 ${patientInfo.value?.patientName} 的${title.value}` : title.value), // title 部分
       showSubTitle.value &&
-      h('span', { style: { marginLeft:patientInfo.value?.patientName? '0px':'8px' } }, subTitle.value) // 根据 showSubTitle 动态渲染 subTitle
+      h('span', { style: { marginLeft: patientInfo.value?.patientName ? '0px' : '8px' } }, subTitle.value) // 根据 showSubTitle 动态渲染 subTitle
     ]
   )
 })
@@ -262,19 +264,18 @@ const show = (config: AddrConfig) => {
   if ('defaultAddress' in config) defaultAddress.value = config.defaultAddress || ''
   if ('defaultSta' in config) defaultSta.value = config.defaultSta || false
   if ('defaultAddrNo' in config) defaultAddrNo.value = config.defaultAddrNo || ''
-  if ('patientInfo' in config) patientInfo.value = config.patientInfo || {
-    patientName:'',
-  patientSex:'',
-  patientAge:'',
+  if ('patientInfo' in config) {
+    const defaultPatientInfo = { patientName: '', patientSex: '', patientAge: '' };
+    patientInfo.value = Object.assign(defaultPatientInfo, config.patientInfo || {})
   }
 }
 
 const cancel = () => {
   visible.value = false;
-  patientInfo.value={
-    patientName:'',
-  patientSex:'',
-  patientAge:'',
+  patientInfo.value = {
+    patientName: '',
+    patientSex: '',
+    patientAge: '',
   }
   emits('closeEmit')
 }
@@ -325,7 +326,7 @@ defineExpose({
   showEdit
 })
 
-function __debounce (fn: (...args: any[]) => void, delay: number) {
+function __debounce(fn: (...args: any[]) => void, delay: number) {
   let timer: ReturnType<typeof setTimeout>
   return (...args: any[]) => {
     clearTimeout(timer)
