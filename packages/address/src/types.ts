@@ -66,5 +66,5 @@ export type AddrConfig = {
   defaultAddress?: string;
   defaultAddrNo?: string;
   defaultSta?: boolean;
-  patientName?:PatientInfo;
+  patientInfo?:PatientInfo;
 };

@@ -262,7 +262,11 @@ const show = (config: AddrConfig) => {
   if ('defaultAddress' in config) defaultAddress.value = config.defaultAddress || ''
   if ('defaultSta' in config) defaultSta.value = config.defaultSta || false
   if ('defaultAddrNo' in config) defaultAddrNo.value = config.defaultAddrNo || ''
-  if ('patientInfo' in config) patientInfo.value = config.patientInfo || {}
+  if ('patientInfo' in config) patientInfo.value = config.patientInfo || {
+    patientName:'',
+  patientSex:'',
+  patientAge:'',
+  }
 }
 
 const cancel = () => {
