@@ -118,7 +118,7 @@ const visible = ref(false)
 const visibleForm = ref(false)
 const showSubTitle = ref(false) // 控制是否显示 subTitle
 const addressRes = ref(<IAddressRes>{})
-let patientName=ref('')
+let patientName=ref('') //就诊人姓名
 
 const copyInviteLink = () => {
   console.log('复制邀请链接')
