@@ -267,7 +267,11 @@ const show = (config: AddrConfig) => {
 
 const cancel = () => {
   visible.value = false;
-  patientInfo.value={}
+  patientInfo.value={
+    patientName:'',
+  patientSex:'',
+  patientAge:'',
+  }
   emits('closeEmit')
 }
 
