@@ -37,7 +37,7 @@ if (!hasChanges()) {
   process.exit(0) // 没有更改时，提前退出
 }
 
-// 执行 Git 提交和推送操作
+// 执行 Git 提交
 try {
   console.log('Executing Git commit and push...')
 
@@ -48,7 +48,7 @@ try {
   execSync(`git commit -m "${commitMessage}"`, { stdio: 'inherit' })
 
   // 推送到远程仓库 'origin' (阿里云)
-  execSync('git push origin main', { stdio: 'inherit' })
+  // execSync('git push origin main', { stdio: 'inherit' })
 
   // 推送到远程仓库 'www-ui-dev' (GitHub)
   // execSync('git push www-ui-dev main', { stdio: 'inherit' })
@@ -66,6 +66,18 @@ try {
   console.log('Version updated!')
 } catch (error) {
   console.error('Error updating version:', error.message)
+  process.exit(1)
+}
+
+// 推送所有更改到远程仓库
+try {
+  console.log('Pushing to remote repositories...')
+  execSync('git push origin main', { stdio: 'inherit' })
+  // 如果需要推送多个远程仓库，取消注释并启用
+  // execSync('git push www-ui-dev main', { stdio: 'inherit' });
+  console.log('Git push to all remotes successful!')
+} catch (error) {
+  console.error('Error during Git push:', error.message)
   process.exit(1)
 }
 
