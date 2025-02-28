@@ -124,11 +124,11 @@ const visible = ref(false)
 const visibleForm = ref(false)
 const showSubTitle = ref(false) // 控制是否显示 subTitle
 const addressRes = ref(<IAddressRes>{})
-let patientInfo = ref({
+const patientInfo = ref({
   patientName: '',
   patientSex: '',
-  patientAge: '',
-}) //就诊人信息
+  patientAge: ''
+}) // 就诊人信息
 
 const copyInviteLink = () => {
   console.log('复制邀请链接')
@@ -265,17 +265,17 @@ const show = (config: AddrConfig) => {
   if ('defaultSta' in config) defaultSta.value = config.defaultSta || false
   if ('defaultAddrNo' in config) defaultAddrNo.value = config.defaultAddrNo || ''
   if ('patientInfo' in config) {
-    const defaultPatientInfo = { patientName: '', patientSex: '', patientAge: '' };
+    const defaultPatientInfo = { patientName: '', patientSex: '', patientAge: '' }
     patientInfo.value = Object.assign(defaultPatientInfo, config.patientInfo || {})
   }
 }
 
 const cancel = () => {
-  visible.value = false;
+  visible.value = false
   patientInfo.value = {
     patientName: '',
     patientSex: '',
-    patientAge: '',
+    patientAge: ''
   }
   emits('closeEmit')
 }
@@ -326,7 +326,7 @@ defineExpose({
   showEdit
 })
 
-function __debounce(fn: (...args: any[]) => void, delay: number) {
+function __debounce (fn: (...args: any[]) => void, delay: number) {
   let timer: ReturnType<typeof setTimeout>
   return (...args: any[]) => {
     clearTimeout(timer)
