@@ -63,5 +63,6 @@ export const phoneDict = [
 ]
 
 export const showMobilePhoneAreaCodeByType = (type: string | number) => {
+  console.log('type', type, phoneDict, phoneDict.find((item) => item.value === String(type)))
   return phoneDict.find((item) => item.value === String(type))?.hd || ''
 }

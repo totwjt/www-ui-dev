@@ -105,12 +105,17 @@
     <div>{{ showMobilePhoneAreaCodeByType('0') }}</div>
 
     <hr>
+
+    <h1>国家地址索引</h1>
+    <IndexBar />
+
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
 import { platform, $eventBus, phonePattern, phoneDict, showMobilePhoneAreaCodeByType } from '@demo-ui-lib/demo-ui-lib'
 import CoverFeildLog from './coverFeild.vue'
+import IndexBar from './indexBar.vue'
 
 // @ts-ignore
 import VueJsonPretty from 'vue-json-pretty'
@@ -544,6 +549,7 @@ const intlTelPhone = ref({
 })
 
 const intlTelPhoneString = ref('13260462736')
+
 </script>
 
 <style scoped lang="scss">

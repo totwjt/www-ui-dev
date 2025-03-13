@@ -6,5 +6,6 @@ export const components = [
   { text: 'ConsultantInformation 就诊人详情', link: '/components/consultant-information' },
   { text: 'Tool 常用的工具', link: '/components/tool' },
   { text: 'Address 地址管理', link: '/components/address' },
-  { text: 'IntlTel 国际化手机号封装', link: '/components/intl-tel' }
+  { text: 'IntlTel 国际化手机号封装', link: '/components/intl-tel' },
+  { text: 'IndexBar 国家地址索引', link: '/components/index-bar' }
 ] // end

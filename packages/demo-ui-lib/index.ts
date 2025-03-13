@@ -6,6 +6,7 @@ import CoverBox from '@demo-ui-lib/cover-box'
 import ConsultantInformation from '@demo-ui-lib/consultant-information'
 import Address from '@demo-ui-lib/address'
 import IntlTel from '@demo-ui-lib/intl-tel'
+import IndexBar from '@demo-ui-lib/index-bar'
 // import component end
 import '../scss/index.scss'
 
@@ -16,7 +17,8 @@ const components = [
   CoverBox,
   ConsultantInformation,
   Address,
-  IntlTel
+  IntlTel,
+  IndexBar
 ] // components
 
 // 全局动态添加组件
